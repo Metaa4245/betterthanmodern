@@ -14,8 +14,8 @@ public class CowEntityMixin {
         CowEntity thisObject = (CowEntity) (Object) this;
         cir.setReturnValue(
                 thisObject.fire > 0
-                        ? ItemRegistry.rawBeef.id
-                        : ItemRegistry.steak.id
+                        ? ItemRegistry.steak.id
+                        : ItemRegistry.rawBeef.id
         );
     }
 }

@@ -15,8 +15,8 @@ public class PigEntityMixin {
         PigEntity thisObject = (PigEntity) (Object) this;
         cir.setReturnValue(
                 thisObject.fire > 0
-                        ? ItemRegistry.rawPorkchop.id
-                        : ItemRegistry.cookedPorkchop.id
+                        ? ItemRegistry.cookedPorkchop.id
+                        : ItemRegistry.rawPorkchop.id
         );
     }
 }
