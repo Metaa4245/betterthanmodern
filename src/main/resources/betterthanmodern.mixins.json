@@ -6,6 +6,8 @@
   "mixins": [
     "ChickenEntityMixin",
     "CowEntityMixin",
+    "CreeperEntityMixin",
+    "EntityAccessor",
     "PigEntityMixin",
     "SheepEntityMixin"
   ]
