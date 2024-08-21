@@ -14,8 +14,8 @@ public class ChickenEntityMixin {
         ChickenEntity thisObject = (ChickenEntity) (Object) this;
         cir.setReturnValue(
                 thisObject.fire > 0
-                        ? ItemRegistry.cookedChicken.id
-                        : ItemRegistry.rawChicken.id
+                        ? ItemRegistry.cookedChickenId
+                        : ItemRegistry.rawChickenId
         );
     }
 }

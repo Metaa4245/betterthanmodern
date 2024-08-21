@@ -14,8 +14,8 @@ public class SheepEntityMixin {
         SheepEntity thisObject = (SheepEntity) (Object) this;
         cir.setReturnValue(
                 thisObject.fire > 0
-                        ? ItemRegistry.cookedMutton.id
-                        : ItemRegistry.rawMutton.id
+                        ? ItemRegistry.cookedMuttonId
+                        : ItemRegistry.rawMuttonId
         );
     }
 }

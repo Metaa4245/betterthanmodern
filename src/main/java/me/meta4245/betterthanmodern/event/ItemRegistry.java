@@ -22,6 +22,15 @@ public class ItemRegistry {
     public static Item cookedPorkchop;
     public static Item steak;
 
+    public static int rawMuttonId = 0;
+    public static int rawChickenId = 0;
+    public static int rawPorkchopId = 0;
+    public static int rawBeefId = 0;
+    public static int cookedChickenId = 0;
+    public static int cookedMuttonId = 0;
+    public static int cookedPorkchopId = 0;
+    public static int steakId = 0;
+
     @EventListener
     public void registerItems(ItemRegistryEvent event) {
         rawMutton = new RawMutton(NAMESPACE.id("raw_mutton")).setTranslationKey(NAMESPACE, "raw_mutton");
@@ -33,5 +42,14 @@ public class ItemRegistry {
         cookedMutton = new CookedMutton(NAMESPACE.id("cooked_mutton")).setTranslationKey(NAMESPACE, "cooked_mutton");
         cookedPorkchop = new CookedPorkchop(NAMESPACE.id("cooked_porkchop")).setTranslationKey(NAMESPACE, "cooked_porkchop");
         steak = new Steak(NAMESPACE.id("steal")).setTranslationKey(NAMESPACE, "steak");
+
+        rawMuttonId = rawMutton.id;
+        rawChickenId = rawChicken.id;
+        rawPorkchopId = rawPorkchop.id;
+        rawBeefId = rawBeef.id;
+        cookedChickenId = cookedChicken.id;
+        cookedMuttonId = cookedMutton.id;
+        cookedPorkchopId = cookedPorkchop.id;
+        steakId = steak.id;
     }
 }
