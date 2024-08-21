@@ -33,6 +33,8 @@ public class ItemRegistry {
     public static Item cookedPorkchop;
     public static Item steak;
 
+    public static Item stalDisc;
+
     @EventListener
     public void registerItems(ItemRegistryEvent event) {
         rawMutton = registerHelper(RawMutton.class, "raw_mutton");
@@ -44,5 +46,7 @@ public class ItemRegistry {
         cookedMutton = registerHelper(CookedMutton.class, "cooked_mutton");
         cookedPorkchop = registerHelper(CookedPorkchop.class, "cooked_porkchop");
         steak = registerHelper(Steak.class, "steak");
+
+        stalDisc = registerHelper(StalDisc.class, "stal_disc");
     }
 }
