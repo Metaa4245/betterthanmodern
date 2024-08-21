@@ -2,7 +2,7 @@ package me.meta4245.betterthanmodern;
 
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.entity.Entity;
-import net.minecraft.level.Level;
+import net.minecraft.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,9 +11,9 @@ public class Mod implements ModInitializer {
 
     // why is this here?
     // TODO: move to AnimalEntityMixin
-    public static Entity createEntity(Class<? extends Entity> clazz, Level level) {
+    public static Entity createEntity(Class<? extends Entity> clazz, World world) {
         try {
-            return clazz.getConstructor(Level.class).newInstance(level);
+            return clazz.getConstructor(World.class).newInstance(world);
         } catch (Exception e) {
             throw new RuntimeException("Couldn't create Entity");
         }

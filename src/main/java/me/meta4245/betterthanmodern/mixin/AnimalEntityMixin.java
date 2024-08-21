@@ -3,13 +3,13 @@ package me.meta4245.betterthanmodern.mixin;
 import me.meta4245.betterthanmodern.IBreeding;
 import me.meta4245.betterthanmodern.Mod;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.living.WalkingEntity;
-import net.minecraft.entity.living.animal.AnimalEntity;
-import net.minecraft.entity.living.player.PlayerEntity;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.level.Level;
-import net.minecraft.util.io.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Mixin(AnimalEntity.class)
-public class AnimalEntityMixin extends WalkingEntity implements IBreeding {
+public class AnimalEntityMixin extends MobEntity implements IBreeding {
     @Unique
     public int breedingTimer = 0;
     @Unique
@@ -31,8 +31,8 @@ public class AnimalEntityMixin extends WalkingEntity implements IBreeding {
     @Unique
     public Entity passiveTarget = null;
 
-    public AnimalEntityMixin(Level level) {
-        super(level);
+    public AnimalEntityMixin(World world) {
+        super(world);
     }
 
     @Override
@@ -77,19 +77,19 @@ public class AnimalEntityMixin extends WalkingEntity implements IBreeding {
 
     @Override
     public boolean betterthanmodern$isFoodItem(ItemStack stack) {
-        return stack != null && stack.getType() == Item.wheat;
+        return stack != null && stack.getItem() == Item.WHEAT;
     }
 
     @Override
     public void betterthanmodern$spawnBaby(IBreeding partner) {
-        if (!level.isRemote) return;
+        if (!world.isRemote) return;
 
-        AnimalEntity entity = (AnimalEntity) Mod.createEntity(this.getClass(), level);
+        AnimalEntity entity = (AnimalEntity) Mod.createEntity(this.getClass(), world);
         entity.move(x, y, z);
 
         ((IBreeding) entity).betterthanmodern$setChildTimer(20 * 60 * 5);
 
-        level.spawnEntity(entity);
+        world.spawnEntity(entity);
         this.betterthanmodern$setFedTimer(0);
         partner.betterthanmodern$setFedTimer(0);
         this.betterthanmodern$setBreedingTimer(20 * 100);
@@ -125,7 +125,7 @@ public class AnimalEntityMixin extends WalkingEntity implements IBreeding {
         if (!betterthanmodern$isFoodItem(item)) return flag;
         if (!betterthanmodern$isBreedable() || !betterthanmodern$isBaby()) return flag;
 
-        item.use(level, player);
+        item.use(world, player);
 
         if (this.betterthanmodern$isBaby()) {
             this.betterthanmodern$setChildTimer(
@@ -135,7 +135,7 @@ public class AnimalEntityMixin extends WalkingEntity implements IBreeding {
             double d = this.random.nextGaussian() * 0.02;
             double d1 = this.random.nextGaussian() * 0.02;
             double d2 = this.random.nextGaussian() * 0.02;
-            this.level.addParticle(
+            this.world.addParticle(
                     "soulflame",
                     this.x + this.random.nextDouble() * this.width * 2 - this.width,
                     this.y + 0.5 + this.random.nextDouble() * this.height,
@@ -153,7 +153,7 @@ public class AnimalEntityMixin extends WalkingEntity implements IBreeding {
     }
 
     @Override
-    public void tick() {
+    public void tickLiving() {
         if (breedingTimer > 0) breedingTimer--;
         if (betterthanmodern$getChildTimer() > 0) {
             isPersistent = true;
@@ -163,8 +163,8 @@ public class AnimalEntityMixin extends WalkingEntity implements IBreeding {
             fedTimer--;
         }
 
-        List<Entity> list = this.level.getEntities(this, this.boundingBox.expanded(0.2, 0.0, 0.2));
-        if (list != null && !list.isEmpty() && !cannotMove()) {
+        List<Entity> list = this.world.getEntities(this, this.boundingBox.expand(0.2, 0.0, 0.2));
+        if (list != null && !list.isEmpty() && !isMovementBlocked()) {
             for (Entity e : list) {
                 if (!(e instanceof IBreeding breed_e)) continue;
 
@@ -179,8 +179,8 @@ public class AnimalEntityMixin extends WalkingEntity implements IBreeding {
             }
         }
 
-        if (ticks % 40 == 0 && !cannotMove()) {
-            list = this.level.getEntities(this, this.boundingBox.expanded(10, 10, 10));
+        if (age % 40 == 0 && !isMovementBlocked()) {
+            list = this.world.getEntities(this, this.boundingBox.expand(10, 10, 10));
             if (betterthanmodern$isBaby() && betterthanmodern$getPassiveTarget() == null) {
                 for (Entity e : list) {
                     if (!(e instanceof IBreeding breed_e)) continue;
@@ -218,11 +218,11 @@ public class AnimalEntityMixin extends WalkingEntity implements IBreeding {
 
         super.tick();
 
-        if (betterthanmodern$isFed() && ticks % 4 == 0) {
+        if (betterthanmodern$isFed() && age % 4 == 0) {
             double d = this.random.nextGaussian() * 0.02;
             double d1 = this.random.nextGaussian() * 0.02;
             double d2 = this.random.nextGaussian() * 0.02;
-            this.level.addParticle(
+            this.world.addParticle(
                     "heart",
                     this.x + this.random.nextDouble() * this.width * 2 - this.width,
                     this.y + 0.5 + this.random.nextDouble() * this.height,
@@ -235,7 +235,7 @@ public class AnimalEntityMixin extends WalkingEntity implements IBreeding {
     }
 
     @Override
-    protected void tickHandSwing() {
+    protected void method_920() {
         if (passiveTarget == null && getTarget() == null) {
             this.setTarget(null);
         }
@@ -248,19 +248,19 @@ public class AnimalEntityMixin extends WalkingEntity implements IBreeding {
             }
         }
 
-        super.tickHandSwing();
+        super.method_920();
     }
 
-    @Inject(method = "writeCustomDataToTag", at = @At("TAIL"))
-    private void saveData(CompoundTag tag, CallbackInfo ci) {
-        tag.put("breeding$breedtime", breedingTimer);
-        tag.put("breeding$fedtime", fedTimer);
-        tag.put("breeding$childtime", childhoodTimer);
-        tag.put("breeding$persistent", isPersistent);
+    @Inject(method = "writeNbt", at = @At("TAIL"))
+    private void writeNbt(NbtCompound tag, CallbackInfo ci) {
+        tag.putInt("breeding$breedtime", breedingTimer);
+        tag.putInt("breeding$fedtime", fedTimer);
+        tag.putInt("breeding$childtime", childhoodTimer);
+        tag.putBoolean("breeding$persistent", isPersistent);
     }
 
-    @Inject(method = "readCustomDataFromTag", at = @At("TAIL"))
-    private void loadData(CompoundTag tag, CallbackInfo ci) {
+    @Inject(method = "readNbt", at = @At("TAIL"))
+    private void readNbt(NbtCompound tag, CallbackInfo ci) {
         this.breedingTimer = tag.getInt("breeding$breedtime");
         this.fedTimer = tag.getInt("breeding$fedtime");
         this.childhoodTimer = tag.getInt("breeding$childtime");
