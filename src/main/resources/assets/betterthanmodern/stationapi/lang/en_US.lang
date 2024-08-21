@@ -6,4 +6,16 @@ item.@.raw_chicken.name=Raw Chicken
 item.@.cooked_chicken.name=Cooked Chicken
 item.@.raw_porkchop.name=Raw Porkchop
 item.@.cooked_porkchop.name=Cooked Porkchop
+
 item.@.stal_disc.name=stal
+item.@.blocks_disc.name=blocks
+item.@.cat_disc.name=cat
+item.@.chirp_disc.name=chirp
+item.@.eleven_disc.name=11
+item.@.far_disc.name=far
+item.@.mall_disc.name=mall
+item.@.mellohi_disc.name=mellohi
+item.@.strad_disc.name=strad
+item.@.thirteen_disc.name=13
+item.@.wait_disc.name=wait
+item.@.ward_disc.name=ward

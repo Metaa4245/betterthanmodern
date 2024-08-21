@@ -12,6 +12,26 @@ import net.modificationstation.stationapi.api.util.Null;
 public class ItemRegistry {
     @Entrypoint.Namespace
     public static final Namespace NAMESPACE = Null.get();
+    public static Item rawMutton;
+    public static Item rawChicken;
+    public static Item rawPorkchop;
+    public static Item rawBeef;
+    public static Item cookedChicken;
+    public static Item cookedMutton;
+    public static Item cookedPorkchop;
+    public static Item steak;
+    public static Item stalDisc;
+    public static Item blocksDisc;
+    public static Item catDisc;
+    public static Item chirpDisc;
+    public static Item elevenDisc;
+    public static Item farDisc;
+    public static Item mallDisc;
+    public static Item mellohiDisc;
+    public static Item stradDisc;
+    public static Item thirteenDisc;
+    public static Item waitDisc;
+    public static Item wardDisc;
 
     private Item registerHelper(Class<? extends Item> clazz, String key) {
         Item i;
@@ -22,18 +42,6 @@ public class ItemRegistry {
         }
         return i;
     }
-
-    public static Item rawMutton;
-    public static Item rawChicken;
-    public static Item rawPorkchop;
-    public static Item rawBeef;
-
-    public static Item cookedChicken;
-    public static Item cookedMutton;
-    public static Item cookedPorkchop;
-    public static Item steak;
-
-    public static Item stalDisc;
 
     @EventListener
     public void registerItems(ItemRegistryEvent event) {
@@ -48,5 +56,16 @@ public class ItemRegistry {
         steak = registerHelper(Steak.class, "steak");
 
         stalDisc = registerHelper(StalDisc.class, "stal_disc");
+        blocksDisc = registerHelper(BlocksDisc.class, "blocks_disc");
+        catDisc = registerHelper(CatDisc.class, "cat_disc");
+        chirpDisc = registerHelper(ChirpDisc.class, "chirp_disc");
+        elevenDisc = registerHelper(ElevenDisc.class, "eleven_disc");
+        farDisc = registerHelper(FarDisc.class, "far_disc");
+        mallDisc = registerHelper(MallDisc.class, "mall_disc");
+        mellohiDisc = registerHelper(MellohiDisc.class, "mellohi_disc");
+        stradDisc = registerHelper(StradDisc.class, "strad_disc");
+        thirteenDisc = registerHelper(ThirteenDisc.class, "thirteen_disc");
+        waitDisc = registerHelper(WaitDisc.class, "wait_disc");
+        wardDisc = registerHelper(WardDisc.class, "ward_disc");
     }
 }
