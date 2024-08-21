@@ -32,7 +32,7 @@ repositories {
         url = 'https://maven.glass-launcher.net/snapshots'
     }
     maven {
-        name = 'Froge'
+        name = 'Forge'
         url 'https://maven.minecraftforge.net/'
     }
     maven {
@@ -55,7 +55,7 @@ repositories {
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.glasslauncher:biny:${project.yarn_mappings}:v2"
+    mappings "com.github.paulevsGitch:BIN-Mappings-BH:${project.yarn_mappings}"
     modImplementation "babric:fabric-loader:${project.loader_version}"
 
     implementation "org.slf4j:slf4j-api:2.1.0-alpha1"
@@ -63,16 +63,7 @@ dependencies {
     implementation "blue.endless:jankson:1.2.3"
 
     modImplementation "net.modificationstation:StationAPI:${project.stapi_version}"
-
-    modImplementation("com.github.calmilamsy:ModMenu:${project.modmenu_version}") {
-        transitive false
-    }
-    modImplementation("net.glasslauncher.mods:GlassConfigAPI:${project.gcapi_version}") {
-        transitive false
-    }
-    modImplementation("net.glasslauncher:HowManyItems-Fabric-Unofficial:${project.howmanyitems_version}") {
-        transitive false
-    }
+    modImplementation "net.glasslauncher.mods:GlassConfigAPI:${project.gcapi_version}"
 }
 
 processResources {
