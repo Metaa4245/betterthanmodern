@@ -13,6 +13,6 @@
     "SheepEntityMixin"
   ],
   "client": [
-    "EntityRendererMixin"
+    "LivingEntityRendererMixin"
   ]
 }
