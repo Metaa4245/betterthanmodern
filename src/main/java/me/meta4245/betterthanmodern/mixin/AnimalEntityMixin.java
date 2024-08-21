@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -163,7 +164,9 @@ public class AnimalEntityMixin extends MobEntity implements IBreeding {
             fedTimer--;
         }
 
-        List<Entity> list = this.world.getEntities(this, this.boundingBox.expand(0.2, 0.0, 0.2));
+        Box area1 = this.boundingBox.copy();
+        area1.expand(0.2, 0.2, 0.2);
+        List<Entity> list = this.world.getEntities(this, area1);
         if (list != null && !list.isEmpty() && !isMovementBlocked()) {
             for (Entity e : list) {
                 if (!(e instanceof IBreeding breed_e)) continue;
@@ -180,7 +183,9 @@ public class AnimalEntityMixin extends MobEntity implements IBreeding {
         }
 
         if (age % 40 == 0 && !isMovementBlocked()) {
-            list = this.world.getEntities(this, this.boundingBox.expand(10, 10, 10));
+            Box area2 = this.boundingBox.copy();
+            area2.expand(10.0, 10.0, 10.0);
+            list = this.world.getEntities(this, area2);
             if (betterthanmodern$isBaby() && betterthanmodern$getPassiveTarget() == null) {
                 for (Entity e : list) {
                     if (!(e instanceof IBreeding breed_e)) continue;
