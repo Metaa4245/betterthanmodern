@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "betterthanmodern:raw_porkchop"
+  },
+  "result": {
+    "item": "betterthanmodern:cooked_porkchop"
+  }
+}
