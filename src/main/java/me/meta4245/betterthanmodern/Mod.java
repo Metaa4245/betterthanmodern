@@ -9,11 +9,6 @@ import org.slf4j.LoggerFactory;
 public class Mod implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("betterthanmodern");
 
-    @Override
-    public void onInitialize() {
-        LOGGER.info("Better than Modern initialized");
-    }
-
     // why is this here?
     // TODO: move to AnimalEntityMixin
     public static Entity createEntity(Class<? extends Entity> clazz, Level level) {
@@ -22,5 +17,10 @@ public class Mod implements ModInitializer {
         } catch (Exception e) {
             throw new RuntimeException("Couldn't create Entity");
         }
+    }
+
+    @Override
+    public void onInitialize() {
+        LOGGER.info("Better than Modern initialized");
     }
 }

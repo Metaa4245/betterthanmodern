@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Random;
 
 @Mixin(CreeperEntity.class)
-public class CreeperEntityMixin {
+public abstract class CreeperEntityMixin {
     @Unique
     private final int[] discs = {
             ItemRegistry.blocksDisc.id,

@@ -11,5 +11,8 @@
     "EntityAccessor",
     "PigEntityMixin",
     "SheepEntityMixin"
+  ],
+  "client": [
+    "EntityRendererMixin"
   ]
 }
