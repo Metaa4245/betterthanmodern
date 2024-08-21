@@ -41,7 +41,7 @@ public class ItemRegistry {
         cookedChicken = new CookedChicken(NAMESPACE.id("cooked_chicken")).setTranslationKey(NAMESPACE, "cooked_chicken");
         cookedMutton = new CookedMutton(NAMESPACE.id("cooked_mutton")).setTranslationKey(NAMESPACE, "cooked_mutton");
         cookedPorkchop = new CookedPorkchop(NAMESPACE.id("cooked_porkchop")).setTranslationKey(NAMESPACE, "cooked_porkchop");
-        steak = new Steak(NAMESPACE.id("steal")).setTranslationKey(NAMESPACE, "steak");
+        steak = new Steak(NAMESPACE.id("steak")).setTranslationKey(NAMESPACE, "steak");
 
         rawMuttonId = rawMutton.id;
         rawChickenId = rawChicken.id;
