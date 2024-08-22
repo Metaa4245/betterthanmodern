@@ -12,13 +12,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class ChickenEntityMixin {
     @Inject(at = @At("HEAD"), method = "getDroppedId", cancellable = true)
     public void getDroppedId(CallbackInfoReturnable<Integer> cir) {
-            EntityAccessor accessor = (EntityAccessor) this;
-            int fireTicks = accessor.getFireTicks();
+        EntityAccessor accessor = (EntityAccessor) this;
+        int fireTicks = accessor.getFireTicks();
 
-            cir.setReturnValue(
-                    fireTicks > 0
-                            ? ItemRegistry.cookedChicken.id
-                            : ItemRegistry.rawChicken.id
-            );
+        cir.setReturnValue(
+                fireTicks > 0
+                        ? ItemRegistry.cookedChicken.id
+                        : ItemRegistry.rawChicken.id
+        );
     }
 }

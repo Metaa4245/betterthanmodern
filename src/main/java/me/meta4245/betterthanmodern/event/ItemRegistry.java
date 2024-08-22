@@ -67,25 +67,25 @@ public class ItemRegistry {
 
     @EventListener
     public void registerItems(ItemRegistryEvent event) {
-            rawMutton = item(RawMutton.class);
-            cookedMutton = item(CookedMutton.class);
-            rawChicken = item(RawChicken.class);
-            cookedChicken = item(CookedChicken.class);
-            rawPorkchop = item(RawPorkchop.class);
-            cookedPorkchop = item(CookedPorkchop.class);
-            rawBeef = item(RawBeef.class);
-            steak = item(Steak.class);
-            stalDisc = item(StalDisc.class);
-            blocksDisc = item(BlocksDisc.class);
-            catDisc = item(CatDisc.class);
-            chirpDisc = item(ChirpDisc.class);
-            elevenDisc = item(ElevenDisc.class);
-            farDisc = item(FarDisc.class);
-            mallDisc = item(MallDisc.class);
-            mellohiDisc = item(MellohiDisc.class);
-            stradDisc = item(StradDisc.class);
-            thirteenDisc = item(ThirteenDisc.class);
-            waitDisc = item(WaitDisc.class);
-            wardDisc = item(WardDisc.class);
+        rawMutton = item(RawMutton.class);
+        cookedMutton = item(CookedMutton.class);
+        rawChicken = item(RawChicken.class);
+        cookedChicken = item(CookedChicken.class);
+        rawPorkchop = item(RawPorkchop.class);
+        cookedPorkchop = item(CookedPorkchop.class);
+        rawBeef = item(RawBeef.class);
+        steak = item(Steak.class);
+        stalDisc = item(StalDisc.class);
+        blocksDisc = item(BlocksDisc.class);
+        catDisc = item(CatDisc.class);
+        chirpDisc = item(ChirpDisc.class);
+        elevenDisc = item(ElevenDisc.class);
+        farDisc = item(FarDisc.class);
+        mallDisc = item(MallDisc.class);
+        mellohiDisc = item(MellohiDisc.class);
+        stradDisc = item(StradDisc.class);
+        thirteenDisc = item(ThirteenDisc.class);
+        waitDisc = item(WaitDisc.class);
+        wardDisc = item(WardDisc.class);
     }
 }
