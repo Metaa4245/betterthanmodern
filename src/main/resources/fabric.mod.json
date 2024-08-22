@@ -12,9 +12,6 @@
   "entrypoints": {
     "stationapi:event_bus": [
       "me.meta4245.betterthanmodern.event.ItemRegistry"
-    ],
-    "gcapi": [
-      "me.meta4245.betterthanmodern.config.Config"
     ]
   },
   "mixins": [

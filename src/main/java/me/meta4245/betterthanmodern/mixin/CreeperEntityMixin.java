@@ -1,6 +1,5 @@
 package me.meta4245.betterthanmodern.mixin;
 
-import me.meta4245.betterthanmodern.Mod;
 import me.meta4245.betterthanmodern.config.Discs;
 import me.meta4245.betterthanmodern.event.ItemRegistry;
 import me.meta4245.betterthanmodern.mixin.accessor.EntityAccessor;
@@ -35,16 +34,11 @@ public abstract class CreeperEntityMixin {
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/MonsterEntity;onKilledBy(Lnet/minecraft/entity/Entity;)V", shift = At.Shift.AFTER), method = "onKilledBy", cancellable = true)
     public void onKilledBy(Entity entity, CallbackInfo ci) {
-        Discs d = Mod.config.discs;
-
-        // TODO: truly amazing code here
-        if (d.blocks || d.stal || d.cat || d.chirp || d.eleven || d.far || d.mall || d.mellohi || d.strad || d.thirteen || d.wait || d.ward) {
             EntityAccessor accessor = (EntityAccessor) this;
             Random random = accessor.getRandom();
             if (entity instanceof SkeletonEntity) {
                 accessor.callDropItem(discs[random.nextInt(discs.length)], 1);
             }
             ci.cancel();
-        }
     }
 }

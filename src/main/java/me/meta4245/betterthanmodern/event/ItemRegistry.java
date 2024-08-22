@@ -1,6 +1,5 @@
 package me.meta4245.betterthanmodern.event;
 
-import me.meta4245.betterthanmodern.Mod;
 import me.meta4245.betterthanmodern.item.disc.*;
 import me.meta4245.betterthanmodern.item.food.*;
 import net.mine_diver.unsafeevents.listener.EventListener;
@@ -39,6 +38,7 @@ public class ItemRegistry {
         StringBuilder name = new StringBuilder();
         String class_name = clazz.getSimpleName();
 
+        // TODO: this is horrible, could probably be simplified
         for (int i = 0; i < class_name.length(); i++) {
             char lower = Character.toLowerCase(class_name.charAt(i));
             if (i == class_name.length() - 1) {
@@ -67,74 +67,25 @@ public class ItemRegistry {
 
     @EventListener
     public void registerItems(ItemRegistryEvent event) {
-        // TODO: better config way
-        // Foods
-        if (Mod.config.foods.mutton) {
             rawMutton = item(RawMutton.class);
             cookedMutton = item(CookedMutton.class);
-        }
-
-        if (Mod.config.foods.chicken) {
             rawChicken = item(RawChicken.class);
             cookedChicken = item(CookedChicken.class);
-        }
-
-        if (Mod.config.foods.porkchop) {
             rawPorkchop = item(RawPorkchop.class);
             cookedPorkchop = item(CookedPorkchop.class);
-        }
-
-        if (Mod.config.foods.beef) {
             rawBeef = item(RawBeef.class);
             steak = item(Steak.class);
-        }
-
-        if (Mod.config.discs.stal) {
             stalDisc = item(StalDisc.class);
-        }
-
-        if (Mod.config.discs.blocks) {
             blocksDisc = item(BlocksDisc.class);
-        }
-
-        if (Mod.config.discs.cat) {
             catDisc = item(CatDisc.class);
-        }
-
-        if (Mod.config.discs.chirp) {
             chirpDisc = item(ChirpDisc.class);
-        }
-
-        if (Mod.config.discs.eleven) {
             elevenDisc = item(ElevenDisc.class);
-        }
-
-        if (Mod.config.discs.far) {
             farDisc = item(FarDisc.class);
-        }
-
-        if (Mod.config.discs.mall) {
             mallDisc = item(MallDisc.class);
-        }
-
-        if (Mod.config.discs.mellohi) {
             mellohiDisc = item(MellohiDisc.class);
-        }
-
-        if (Mod.config.discs.strad) {
             stradDisc = item(StradDisc.class);
-        }
-
-        if (Mod.config.discs.thirteen) {
             thirteenDisc = item(ThirteenDisc.class);
-        }
-
-        if (Mod.config.discs.wait) {
             waitDisc = item(WaitDisc.class);
-        }
-
-        if (Mod.config.discs.ward) {
             wardDisc = item(WardDisc.class);
-        }
     }
 }
