@@ -6,9 +6,9 @@ import net.glasslauncher.mods.api.gcapi.api.MultiplayerSynced;
 public class Config {
     @ConfigCategory("Discs")
     @MultiplayerSynced
-    public Discs discs;
+    public Discs discs = new Discs();
 
     @ConfigCategory("Foods")
     @MultiplayerSynced
-    public Food foods;
+    public Food foods = new Food();
 }

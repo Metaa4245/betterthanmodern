@@ -6,49 +6,49 @@ import net.glasslauncher.mods.api.gcapi.api.MultiplayerSynced;
 public class Discs {
     @ConfigName("Blocks disc")
     @MultiplayerSynced
-    public boolean blocks;
+    public boolean blocks = true;
 
     @ConfigName("Cat disc")
     @MultiplayerSynced
-    public boolean cat;
+    public boolean cat = true;
 
     @ConfigName("Chirp disc")
     @MultiplayerSynced
-    public boolean chirp;
+    public boolean chirp = true;
 
     @ConfigName("11 disc")
     @MultiplayerSynced
-    public boolean eleven;
+    public boolean eleven = true;
 
     @ConfigName("Far disc")
     @MultiplayerSynced
-    public boolean far;
+    public boolean far = true;
 
     @ConfigName("Mall disc")
     @MultiplayerSynced
-    public boolean mall;
+    public boolean mall = true;
 
     @ConfigName("Mellohi disc")
     @MultiplayerSynced
-    public boolean mellohi;
+    public boolean mellohi = true;
 
     @ConfigName("Stal disc")
     @MultiplayerSynced
-    public boolean stal;
+    public boolean stal = true;
 
     @ConfigName("Strad disc")
     @MultiplayerSynced
-    public boolean strad;
+    public boolean strad = true;
 
     @ConfigName("13 disc")
     @MultiplayerSynced
-    public boolean thirteen;
+    public boolean thirteen = true;
 
     @ConfigName("Wait disc")
     @MultiplayerSynced
-    public boolean wait;
+    public boolean wait = true;
 
     @ConfigName("Ward disc")
     @MultiplayerSynced
-    public boolean ward;
+    public boolean ward = true;
 }

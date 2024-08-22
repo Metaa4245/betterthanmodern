@@ -9,6 +9,5 @@ public class Mod implements ModInitializer {
     public static final Config config = new Config();
 
     @Override
-    public void onInitialize() {
-    }
+    public void onInitialize() {}
 }

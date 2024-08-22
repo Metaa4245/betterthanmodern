@@ -6,17 +6,17 @@ import net.glasslauncher.mods.api.gcapi.api.MultiplayerSynced;
 public class Food {
     @ConfigName("Chicken")
     @MultiplayerSynced
-    public boolean chicken;
+    public boolean chicken = true;
 
     @ConfigName("Mutton")
     @MultiplayerSynced
-    public boolean mutton;
+    public boolean mutton = true;
 
     @ConfigName("Porkchop")
     @MultiplayerSynced
-    public boolean porkchop;
+    public boolean porkchop = true;
 
     @ConfigName("Beef")
     @MultiplayerSynced
-    public boolean beef;
+    public boolean beef = true;
 }
