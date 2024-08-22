@@ -35,13 +35,33 @@ public class ItemRegistry {
     public static Item waitDisc;
     public static Item wardDisc;
 
-    private Item item(Class<? extends Item> clazz, String key) {
+    private Item item(Class<? extends Item> clazz) {
+        StringBuilder name = new StringBuilder();
+        String class_name = clazz.getSimpleName();
+
+        for (int i = 0; i < class_name.length(); i++) {
+            char lower = Character.toLowerCase(class_name.charAt(i));
+            if (i == class_name.length() - 1) {
+                name.append(lower);
+            } else if (Character.isUpperCase(class_name.charAt(i)) && i == 0) {
+                name.append(lower);
+            } else if (Character.isUpperCase(class_name.charAt(i + 1)) && i != 0) {
+                name.append(lower);
+                name.append("_");
+            } else {
+                name.append(lower);
+            }
+        }
+
+        String key = name.toString();
         Item i;
+
         try {
             i = clazz.getConstructor(Identifier.class).newInstance(NAMESPACE.id(key)).setTranslationKey(NAMESPACE, key);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
         return i;
     }
 
@@ -50,71 +70,71 @@ public class ItemRegistry {
         // TODO: better config way
         // Foods
         if (Mod.config.foods.mutton) {
-            rawMutton = item(RawMutton.class, "raw_mutton");
-            cookedMutton = item(CookedMutton.class, "cooked_mutton");
+            rawMutton = item(RawMutton.class);
+            cookedMutton = item(CookedMutton.class);
         }
 
         if (Mod.config.foods.chicken) {
-            rawChicken = item(RawChicken.class, "raw_chicken");
-            cookedChicken = item(CookedChicken.class, "cooked_chicken");
+            rawChicken = item(RawChicken.class);
+            cookedChicken = item(CookedChicken.class);
         }
 
         if (Mod.config.foods.porkchop) {
-            rawPorkchop = item(RawPorkchop.class, "raw_porkchop");
-            cookedPorkchop = item(CookedPorkchop.class, "cooked_porkchop");
+            rawPorkchop = item(RawPorkchop.class);
+            cookedPorkchop = item(CookedPorkchop.class);
         }
 
         if (Mod.config.foods.beef) {
-            rawBeef = item(RawBeef.class, "raw_beef");
-            steak = item(Steak.class, "steak");
+            rawBeef = item(RawBeef.class);
+            steak = item(Steak.class);
         }
 
         if (Mod.config.discs.stal) {
-            stalDisc = item(StalDisc.class, "stal_disc");
+            stalDisc = item(StalDisc.class);
         }
 
         if (Mod.config.discs.blocks) {
-            blocksDisc = item(BlocksDisc.class, "blocks_disc");
+            blocksDisc = item(BlocksDisc.class);
         }
 
         if (Mod.config.discs.cat) {
-            catDisc = item(CatDisc.class, "cat_disc");
+            catDisc = item(CatDisc.class);
         }
 
         if (Mod.config.discs.chirp) {
-            chirpDisc = item(ChirpDisc.class, "chirp_disc");
+            chirpDisc = item(ChirpDisc.class);
         }
 
         if (Mod.config.discs.eleven) {
-            elevenDisc = item(ElevenDisc.class, "eleven_disc");
+            elevenDisc = item(ElevenDisc.class);
         }
 
         if (Mod.config.discs.far) {
-            farDisc = item(FarDisc.class, "far_disc");
+            farDisc = item(FarDisc.class);
         }
 
         if (Mod.config.discs.mall) {
-            mallDisc = item(MallDisc.class, "mall_disc");
+            mallDisc = item(MallDisc.class);
         }
 
         if (Mod.config.discs.mellohi) {
-            mellohiDisc = item(MellohiDisc.class, "mellohi_disc");
+            mellohiDisc = item(MellohiDisc.class);
         }
 
         if (Mod.config.discs.strad) {
-            stradDisc = item(StradDisc.class, "strad_disc");
+            stradDisc = item(StradDisc.class);
         }
 
         if (Mod.config.discs.thirteen) {
-            thirteenDisc = item(ThirteenDisc.class, "thirteen_disc");
+            thirteenDisc = item(ThirteenDisc.class);
         }
 
         if (Mod.config.discs.wait) {
-            waitDisc = item(WaitDisc.class, "wait_disc");
+            waitDisc = item(WaitDisc.class);
         }
 
         if (Mod.config.discs.ward) {
-            wardDisc = item(WardDisc.class, "ward_disc");
+            wardDisc = item(WardDisc.class);
         }
     }
 }
