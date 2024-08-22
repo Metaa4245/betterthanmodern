@@ -1,5 +1,6 @@
 package me.meta4245.betterthanmodern.event;
 
+import me.meta4245.betterthanmodern.Mod;
 import me.meta4245.betterthanmodern.item.disc.*;
 import me.meta4245.betterthanmodern.item.food.*;
 import net.mine_diver.unsafeevents.listener.EventListener;
@@ -34,7 +35,7 @@ public class ItemRegistry {
     public static Item waitDisc;
     public static Item wardDisc;
 
-    private Item registerHelper(Class<? extends Item> clazz, String key) {
+    private Item item(Class<? extends Item> clazz, String key) {
         Item i;
         try {
             i = clazz.getConstructor(Identifier.class).newInstance(NAMESPACE.id(key)).setTranslationKey(NAMESPACE, key);
@@ -46,27 +47,74 @@ public class ItemRegistry {
 
     @EventListener
     public void registerItems(ItemRegistryEvent event) {
-        rawMutton = registerHelper(RawMutton.class, "raw_mutton");
-        rawChicken = registerHelper(RawChicken.class, "raw_chicken");
-        rawPorkchop = registerHelper(RawPorkchop.class, "raw_porkchop");
-        rawBeef = registerHelper(RawBeef.class, "raw_beef");
+        // TODO: better config way
+        // Foods
+        if (Mod.config.foods.mutton) {
+            rawMutton = item(RawMutton.class, "raw_mutton");
+            cookedMutton = item(CookedMutton.class, "cooked_mutton");
+        }
 
-        cookedChicken = registerHelper(CookedChicken.class, "cooked_chicken");
-        cookedMutton = registerHelper(CookedMutton.class, "cooked_mutton");
-        cookedPorkchop = registerHelper(CookedPorkchop.class, "cooked_porkchop");
-        steak = registerHelper(Steak.class, "steak");
+        if (Mod.config.foods.chicken) {
+            rawChicken = item(RawChicken.class, "raw_chicken");
+            cookedChicken = item(CookedChicken.class, "cooked_chicken");
+        }
 
-        stalDisc = registerHelper(StalDisc.class, "stal_disc");
-        blocksDisc = registerHelper(BlocksDisc.class, "blocks_disc");
-        catDisc = registerHelper(CatDisc.class, "cat_disc");
-        chirpDisc = registerHelper(ChirpDisc.class, "chirp_disc");
-        elevenDisc = registerHelper(ElevenDisc.class, "eleven_disc");
-        farDisc = registerHelper(FarDisc.class, "far_disc");
-        mallDisc = registerHelper(MallDisc.class, "mall_disc");
-        mellohiDisc = registerHelper(MellohiDisc.class, "mellohi_disc");
-        stradDisc = registerHelper(StradDisc.class, "strad_disc");
-        thirteenDisc = registerHelper(ThirteenDisc.class, "thirteen_disc");
-        waitDisc = registerHelper(WaitDisc.class, "wait_disc");
-        wardDisc = registerHelper(WardDisc.class, "ward_disc");
+        if (Mod.config.foods.porkchop) {
+            rawPorkchop = item(RawPorkchop.class, "raw_porkchop");
+            cookedPorkchop = item(CookedPorkchop.class, "cooked_porkchop");
+        }
+
+        if (Mod.config.foods.beef) {
+            rawBeef = item(RawBeef.class, "raw_beef");
+            steak = item(Steak.class, "steak");
+        }
+
+        if (Mod.config.discs.stal) {
+            stalDisc = item(StalDisc.class, "stal_disc");
+        }
+
+        if (Mod.config.discs.blocks) {
+            blocksDisc = item(BlocksDisc.class, "blocks_disc");
+        }
+
+        if (Mod.config.discs.cat) {
+            catDisc = item(CatDisc.class, "cat_disc");
+        }
+
+        if (Mod.config.discs.chirp) {
+            chirpDisc = item(ChirpDisc.class, "chirp_disc");
+        }
+
+        if (Mod.config.discs.eleven) {
+            elevenDisc = item(ElevenDisc.class, "eleven_disc");
+        }
+
+        if (Mod.config.discs.far) {
+            farDisc = item(FarDisc.class, "far_disc");
+        }
+
+        if (Mod.config.discs.mall) {
+            mallDisc = item(MallDisc.class, "mall_disc");
+        }
+
+        if (Mod.config.discs.mellohi) {
+            mellohiDisc = item(MellohiDisc.class, "mellohi_disc");
+        }
+
+        if (Mod.config.discs.strad) {
+            stradDisc = item(StradDisc.class, "strad_disc");
+        }
+
+        if (Mod.config.discs.thirteen) {
+            thirteenDisc = item(ThirteenDisc.class, "thirteen_disc");
+        }
+
+        if (Mod.config.discs.wait) {
+            waitDisc = item(WaitDisc.class, "wait_disc");
+        }
+
+        if (Mod.config.discs.ward) {
+            wardDisc = item(WardDisc.class, "ward_disc");
+        }
     }
 }
