@@ -37,20 +37,14 @@ public class ItemRegistry {
     private Item item(Class<? extends Item> clazz) {
         StringBuilder name = new StringBuilder();
         String class_name = clazz.getSimpleName();
+        int len = class_name.length();
 
-        // TODO: this is horrible, could probably be simplified
-        for (int i = 0; i < class_name.length(); i++) {
-            char lower = Character.toLowerCase(class_name.charAt(i));
-            if (i == class_name.length() - 1) {
-                name.append(lower);
-            } else if (Character.isUpperCase(class_name.charAt(i)) && i == 0) {
-                name.append(lower);
-            } else if (Character.isUpperCase(class_name.charAt(i + 1)) && i != 0) {
-                name.append(lower);
+        for (int i = 0; i < len; i++) {
+            char c = class_name.charAt(i);
+            if (Character.isUpperCase(c) && i != len - 1 && i != 0) {
                 name.append("_");
-            } else {
-                name.append(lower);
             }
+            name.append(Character.toLowerCase(c));
         }
 
         String key = name.toString();
