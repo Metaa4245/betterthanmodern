@@ -1,6 +1,7 @@
 package me.meta4245.betterthanmodern.mixin;
 
 import me.meta4245.betterthanmodern.event.ItemRegistry;
+import me.meta4245.betterthanmodern.mixin.accessor.EntityAccessor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
@@ -32,10 +33,10 @@ public abstract class CreeperEntityMixin {
 
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/MonsterEntity;onKilledBy(Lnet/minecraft/entity/Entity;)V", shift = At.Shift.AFTER), method = "onKilledBy", cancellable = true)
     public void onKilledBy(Entity entity, CallbackInfo ci) {
-        CreeperEntity thisObject = (CreeperEntity) (Object) this;
-        Random random = ((EntityAccessor) thisObject).getRandom();
+        EntityAccessor accessor = (EntityAccessor) this;
+        Random random = accessor.getRandom();
         if (entity instanceof SkeletonEntity) {
-            thisObject.dropItem(discs[random.nextInt(discs.length)], 1);
+            accessor.callDropItem(discs[random.nextInt(discs.length)], 1);
         }
         ci.cancel();
     }
