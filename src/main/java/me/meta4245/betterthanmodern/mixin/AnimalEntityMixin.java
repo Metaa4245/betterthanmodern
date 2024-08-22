@@ -164,9 +164,9 @@ public class AnimalEntityMixin extends MobEntity implements IBreeding {
             fedTimer--;
         }
 
-        Box area1 = this.boundingBox.copy();
-        area1.expand(0.2, 0.2, 0.2);
-        List<Entity> list = this.world.getEntities(this, area1);
+//        Box area1 = this.boundingBox.copy();
+//        area1.expand(0.2, 0.2, 0.2);
+        List<Entity> list = this.world.getEntities(this, this.boundingBox);
         if (list != null && !list.isEmpty() && !isMovementBlocked()) {
             for (Entity e : list) {
                 if (!(e instanceof IBreeding breed_e)) continue;
@@ -183,9 +183,9 @@ public class AnimalEntityMixin extends MobEntity implements IBreeding {
         }
 
         if (age % 40 == 0 && !isMovementBlocked()) {
-            Box area2 = this.boundingBox.copy();
-            area2.expand(10.0, 10.0, 10.0);
-            list = this.world.getEntities(this, area2);
+//            Box area2 = this.boundingBox.copy();
+//            area2.expand(10.0, 10.0, 10.0);
+            list = this.world.getEntities(this, this.boundingBox);
             if (betterthanmodern$isBaby() && betterthanmodern$getPassiveTarget() == null) {
                 for (Entity e : list) {
                     if (!(e instanceof IBreeding breed_e)) continue;
