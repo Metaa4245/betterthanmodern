@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PigEntity.class)
-public class PigEntityMixin {
+public abstract class PigEntityMixin {
     @Inject(at = @At("HEAD"), method = "getDroppedId", cancellable = true)
     public void getDroppedId(CallbackInfoReturnable<Integer> cir) {
         // TODO: figure out a better way?

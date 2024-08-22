@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ChickenEntity.class)
-public class ChickenEntityMixin {
+public abstract class ChickenEntityMixin {
     @Inject(at = @At("HEAD"), method = "getDroppedId", cancellable = true)
     public void getDroppedId(CallbackInfoReturnable<Integer> cir) {
         ChickenEntity thisObject = (ChickenEntity) (Object) this;
