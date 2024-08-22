@@ -1,6 +1,7 @@
 package me.meta4245.betterthanmodern.event;
 
-import me.meta4245.betterthanmodern.item.*;
+import me.meta4245.betterthanmodern.item.disc.*;
+import me.meta4245.betterthanmodern.item.food.*;
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.item.Item;
 import net.modificationstation.stationapi.api.event.registry.ItemRegistryEvent;
