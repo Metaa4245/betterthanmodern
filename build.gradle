@@ -1,10 +1,8 @@
 plugins {
     id 'fabric-loom' version '1.6.2'
     id 'babric-loom-extension' version '1.7.4'
+    id 'org.jetbrains.kotlin.jvm'
 }
-
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
 
 archivesBaseName = project.archives_base_name
 version = project.mod_version
@@ -61,6 +59,10 @@ dependencies {
     implementation "blue.endless:jankson:1.2.3"
 
     modImplementation "net.modificationstation:StationAPI:${project.stapi_version}"
+
+    modImplementation "com.github.Chocohead:Fabric-ASM:${project.asm_version}"
+    include "com.github.Chocohead:Fabric-ASM:${project.asm_version}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 processResources {
@@ -71,12 +73,8 @@ processResources {
     }
 }
 
-tasks.withType(JavaCompile).configureEach {
-    it.options.release = 17
-}
-
-java {
-    withSourcesJar()
+kotlin {
+    jvmToolchain(17)
 }
 
 jar {

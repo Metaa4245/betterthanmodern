@@ -12,6 +12,9 @@
   "entrypoints": {
     "stationapi:event_bus": [
       "me.meta4245.betterthanmodern.event.ItemRegistry"
+    ],
+    "mm:early_risers": [
+      "me.meta4245.betterthanmodern.EarlyRiser"
     ]
   },
   "mixins": [
