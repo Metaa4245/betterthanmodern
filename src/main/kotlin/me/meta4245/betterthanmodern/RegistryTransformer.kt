@@ -18,7 +18,7 @@ class RegistryTransformer : Consumer<ClassNode> {
         classes = classes.map { s -> "me/meta4245/betterthanmodern/item/$s" }
         val typeNames = classes.map { s -> "L$s;" }
         val simpleNames = classes.map { s ->
-            val split = s.split("\\/")
+            val split = s.split("/")
             split[split.size - 1]
         }
 

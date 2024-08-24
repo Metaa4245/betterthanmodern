@@ -4,11 +4,7 @@
   "package": "me.meta4245.betterthanmodern.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ChickenEntityMixin",
-    "CowEntityMixin",
-    "CreeperEntityMixin",
-    "PigEntityMixin",
-    "SheepEntityMixin",
+    "StatsMixin",
     "accessor.EntityAccessor"
   ]
 }
