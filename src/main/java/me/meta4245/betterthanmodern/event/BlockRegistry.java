@@ -1,7 +1,7 @@
 package me.meta4245.betterthanmodern.event;
 
 import me.meta4245.betterthanmodern.ReflectionHacks;
-import me.meta4245.betterthanmodern.block.*;
+import me.meta4245.betterthanmodern.block.SmoothStone;
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.block.Block;
 import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;

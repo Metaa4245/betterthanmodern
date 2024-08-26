@@ -1,6 +1,6 @@
 package me.meta4245.betterthanmodern;
 
-public class ReflectionHacks {
+public abstract class ReflectionHacks {
     public static String get_name(Class<?> clazz) {
         StringBuilder name = new StringBuilder();
         String simpleName = clazz.getSimpleName();

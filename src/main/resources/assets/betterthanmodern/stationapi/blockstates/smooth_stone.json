@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "betterthanmodern:block/smooth_stone" }
+    "": {
+      "model": "betterthanmodern:block/smooth_stone"
+    }
   }
 }
