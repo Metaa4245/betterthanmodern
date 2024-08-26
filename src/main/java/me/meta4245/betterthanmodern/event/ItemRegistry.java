@@ -14,27 +14,27 @@ public class ItemRegistry {
     @Entrypoint.Namespace
     private final static Namespace NAMESPACE = Null.get();
 
-    Item blocksDisc;
-    Item catDisc;
-    Item chirpDisc;
-    Item elevenDisc;
-    Item farDisc;
-    Item mallDisc;
-    Item mellohiDisc;
-    Item stalDisc;
-    Item stradDisc;
-    Item thirteenDisc;
-    Item waitDisc;
-    Item wardDisc;
+    public static Item blocksDisc;
+    public static Item catDisc;
+    public static Item chirpDisc;
+    public static Item elevenDisc;
+    public static Item farDisc;
+    public static Item mallDisc;
+    public static Item mellohiDisc;
+    public static Item stalDisc;
+    public static Item stradDisc;
+    public static Item thirteenDisc;
+    public static Item waitDisc;
+    public static Item wardDisc;
 
-    Item cookedChicken;
-    Item cookedMutton;
-    Item cookedPorkchop;
-    Item steak;
-    Item rawBeef;
-    Item rawChicken;
-    Item rawMutton;
-    Item rawPorkchop;
+    public static Item cookedChicken;
+    public static Item cookedMutton;
+    public static Item cookedPorkchop;
+    public static Item steak;
+    public static Item rawBeef;
+    public static Item rawChicken;
+    public static Item rawMutton;
+    public static Item rawPorkchop;
 
     private Item item(Class<? extends Item> clazz) {
         StringBuilder name = new StringBuilder();
