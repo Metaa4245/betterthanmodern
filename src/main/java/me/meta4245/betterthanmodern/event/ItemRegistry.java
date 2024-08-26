@@ -1,5 +1,6 @@
 package me.meta4245.betterthanmodern.event;
 
+import me.meta4245.betterthanmodern.ReflectionHacks;
 import me.meta4245.betterthanmodern.item.disc.*;
 import me.meta4245.betterthanmodern.item.food.*;
 import net.mine_diver.unsafeevents.listener.EventListener;
@@ -37,20 +38,7 @@ public class ItemRegistry {
     public static Item rawPorkchop;
 
     private Item item(Class<? extends Item> clazz) {
-        StringBuilder name = new StringBuilder();
-        String simpleName = clazz.getSimpleName();
-        int len = simpleName.length();
-
-        for (int i = 0; i < len; i++) {
-            char c = simpleName.charAt(i);
-
-            if (Character.isUpperCase(c) && i != len - 1 && i != 0) {
-                name.append("_");
-            }
-            name.append(Character.toLowerCase(c));
-        }
-
-        String key = name.toString();
+        String key = ReflectionHacks.get_name(clazz);
         Item item;
 
         try {

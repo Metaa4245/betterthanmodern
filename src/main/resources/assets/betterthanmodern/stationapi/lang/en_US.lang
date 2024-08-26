@@ -19,3 +19,5 @@ item.@.strad_disc.name=strad
 item.@.thirteen_disc.name=13
 item.@.wait_disc.name=wait
 item.@.ward_disc.name=ward
+
+tile.@.smooth_stone.name=Smooth Stone

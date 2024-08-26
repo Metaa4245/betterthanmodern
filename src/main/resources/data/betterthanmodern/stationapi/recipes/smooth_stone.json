@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "minecraft:stone"
+  },
+  "result": {
+    "item": "betterthanmodern:smooth_stone"
+  }
+}

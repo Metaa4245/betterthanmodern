@@ -11,7 +11,8 @@
   "environment": "*",
   "entrypoints": {
     "stationapi:event_bus": [
-      "me.meta4245.betterthanmodern.event.ItemRegistry"
+      "me.meta4245.betterthanmodern.event.ItemRegistry",
+      "me.meta4245.betterthanmodern.event.BlockRegistry"
     ]
   },
   "mixins": [
