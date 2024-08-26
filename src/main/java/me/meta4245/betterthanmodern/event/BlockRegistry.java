@@ -23,7 +23,7 @@ public class BlockRegistry {
         try {
             block = clazz.getConstructor(Identifier.class)
                     .newInstance(NAMESPACE.id(key))
-                    .setTranslationKey(key);
+                    .setTranslationKey(NAMESPACE, key);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
