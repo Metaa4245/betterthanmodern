@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "betterthanmodern:block/redstone_block"
+    }
+  }
+}
