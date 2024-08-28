@@ -8,6 +8,7 @@
     "CowEntityMixin",
     "CreeperEntityMixin",
     "FarmlandBlockMixin",
+    "FurnaceBlockEntityMixin",
     "PigEntityMixin",
     "SheepEntityMixin",
     "accessor.EntityAccessor"
