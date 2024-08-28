@@ -6,7 +6,8 @@ import net.modificationstation.stationapi.api.util.Identifier;
 
 public class EmeraldBlock extends TemplateBlock {
     public EmeraldBlock(Identifier identifier) {
-        super(identifier, Material.STONE);
+        super(identifier, Material.METAL);
         super.setHardness(5);
+        super.setResistance(6);
     }
 }

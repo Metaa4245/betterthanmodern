@@ -6,7 +6,9 @@ import net.modificationstation.stationapi.api.util.Identifier;
 
 public class BoneBlock extends TemplateBlock {
     public BoneBlock(Identifier identifier) {
-        super(identifier, Material.STONE);
+        // TODO: is this the correct Material?
+        super(identifier, Material.SOLID_ORGANIC);
         super.setHardness(2);
+        super.setResistance(2);
     }
 }
