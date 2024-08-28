@@ -1,7 +1,7 @@
 package me.meta4245.betterthanmodern.event;
 
 import me.meta4245.betterthanmodern.ReflectionHacks;
-import me.meta4245.betterthanmodern.block.SmoothStone;
+import me.meta4245.betterthanmodern.block.*;
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.block.Block;
 import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
@@ -15,6 +15,10 @@ public class BlockRegistry {
     public static final Namespace NAMESPACE = Null.get();
 
     public static Block smoothStone;
+    public static Block boneBlock;
+    public static Block coalBlock;
+    public static Block emeraldBlock;
+    public static Block redstoneBlock;
 
     private Block block(Class<? extends Block> clazz) {
         String key = ReflectionHacks.get_name(clazz);
@@ -34,5 +38,9 @@ public class BlockRegistry {
     @EventListener
     public void registerBlocks(BlockRegistryEvent event) {
         smoothStone = block(SmoothStone.class);
+        boneBlock = block(BoneBlock.class);
+        coalBlock = block(CoalBlock.class);
+        emeraldBlock = block(EmeraldBlock.class);
+        redstoneBlock = block(RedstoneBlock.class);
     }
 }
