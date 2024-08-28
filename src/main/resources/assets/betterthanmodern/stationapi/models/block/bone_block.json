@@ -1,7 +1,0 @@
-{
-  "parent": "block/cube_top",
-  "textures": {
-    "top": "betterthanmodern:block/bone_block_top",
-    "side": "betterthanmodern:block/bone_block_side"
-  }
-}

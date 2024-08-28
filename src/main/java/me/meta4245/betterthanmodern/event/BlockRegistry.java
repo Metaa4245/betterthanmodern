@@ -15,9 +15,7 @@ public class BlockRegistry {
     public static final Namespace NAMESPACE = Null.get();
 
     public static Block smoothStone;
-    public static Block boneBlock;
     public static Block coalBlock;
-    public static Block emeraldBlock;
     public static Block redstoneBlock;
 
     private Block block(Class<? extends Block> clazz) {
@@ -38,9 +36,7 @@ public class BlockRegistry {
     @EventListener
     public void registerBlocks(BlockRegistryEvent event) {
         smoothStone = block(SmoothStone.class);
-        boneBlock = block(BoneBlock.class);
         coalBlock = block(CoalBlock.class);
-        emeraldBlock = block(EmeraldBlock.class);
         redstoneBlock = block(RedstoneBlock.class);
     }
 }

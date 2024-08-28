@@ -21,7 +21,5 @@ item.@.wait_disc.name=wait
 item.@.ward_disc.name=ward
 
 tile.@.smooth_stone.name=Smooth Stone
-tile.@.bone_block.name=Bone Block
 tile.@.coal_block.name=Block of Coal
-tile.@.emerald_block.name=Block of Emerald
 tile.@.redstone_block.name=Block of Redstone
