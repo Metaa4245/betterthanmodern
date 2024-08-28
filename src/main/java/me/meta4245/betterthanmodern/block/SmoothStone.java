@@ -7,5 +7,6 @@ import net.modificationstation.stationapi.api.util.Identifier;
 public class SmoothStone extends TemplateBlock {
     public SmoothStone(Identifier identifier) {
         super(identifier, Material.METAL);
+        super.setHardness(2);
     }
 }

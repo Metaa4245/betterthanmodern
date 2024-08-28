@@ -7,5 +7,6 @@ import net.modificationstation.stationapi.api.util.Identifier;
 public class BoneBlock extends TemplateBlock {
     public BoneBlock(Identifier identifier) {
         super(identifier, Material.STONE);
+        super.setHardness(2);
     }
 }
