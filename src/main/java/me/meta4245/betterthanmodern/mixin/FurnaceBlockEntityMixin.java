@@ -10,7 +10,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FurnaceBlockEntity.class)
 public abstract class FurnaceBlockEntityMixin {
-    @Inject(method = "getFuelTime", at = @At("TAIL"), cancellable = true)
+    @Inject(
+            method = "getFuelTime",
+            at = @At("RETURN"),
+            cancellable = true
+    )
     public void getFuelTime(ItemStack i, CallbackInfoReturnable<Integer> cir) {
         if (i.getItem().id == BlockRegistry.coalBlock.id) {
             cir.setReturnValue(16000);
