@@ -10,7 +10,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(FarmlandBlock.class)
 public abstract class FarmlandBlockMixin {
-    @Inject(method = "onSteppedOn", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "onSteppedOn",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     public void onSteppedOn(
             World world,
             int x,

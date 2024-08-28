@@ -30,7 +30,14 @@ public abstract class CreeperEntityMixin {
             ItemRegistry.wardDisc.id
     };
 
-    @Inject(method = "onKilledBy", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/CreeperEntity;dropItem(II)Lnet/minecraft/entity/ItemEntity;"), cancellable = true)
+    @Inject(
+            method = "onKilledBy",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/entity/mob/CreeperEntity;dropItem(II)Lnet/minecraft/entity/ItemEntity;"
+            ),
+            cancellable = true
+    )
     private void onKilledBy(Entity par1, CallbackInfo ci) {
         EntityAccessor accessor = (EntityAccessor) this;
         Random random = accessor.getRandom();

@@ -12,7 +12,11 @@ import java.util.Random;
 
 @Mixin(PigEntity.class)
 public abstract class PigEntityMixin {
-    @Inject(method = "getDroppedId", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "getDroppedId",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void getDroppedId(CallbackInfoReturnable<Integer> cir) {
         EntityAccessor accessor = (EntityAccessor) this;
         Random random = accessor.getRandom();

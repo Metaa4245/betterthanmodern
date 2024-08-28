@@ -13,7 +13,11 @@ import java.util.Random;
 
 @Mixin(ChickenEntity.class)
 public abstract class ChickenEntityMixin {
-    @Inject(method = "getDroppedId", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "getDroppedId",
+            at = @At("HEAD"),
+            cancellable = true
+    )
     private void getDroppedId(CallbackInfoReturnable<Integer> cir) {
         EntityAccessor accessor = (EntityAccessor) this;
         Random random = accessor.getRandom();
