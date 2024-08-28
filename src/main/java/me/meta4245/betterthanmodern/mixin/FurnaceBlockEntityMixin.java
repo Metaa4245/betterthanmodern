@@ -16,7 +16,7 @@ public abstract class FurnaceBlockEntityMixin {
             cancellable = true
     )
     public void getFuelTime(ItemStack i, CallbackInfoReturnable<Integer> cir) {
-        if (i.getItem().id == BlockRegistry.coalBlock.id) {
+        if (i.getItem().id == BlockRegistry.coalBlock.asItem().id) {
             cir.setReturnValue(16000);
         }
     }
