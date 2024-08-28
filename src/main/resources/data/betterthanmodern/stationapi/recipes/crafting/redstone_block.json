@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "rrr",
+    "rrr",
+    "rrr"
+  ],
+  "key": {
+    "r": {
+      "item": "minecraft:redstone_dust"
+    }
+  },
+  "result": {
+    "item": "betterthanmodern:redstone_block"
+  }
+}

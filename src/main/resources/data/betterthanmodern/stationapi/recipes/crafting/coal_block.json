@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ccc",
+    "ccc",
+    "ccc"
+  ],
+  "key": {
+    "c": {
+      "item": "minecraft:coal"
+    }
+  },
+  "result": {
+    "item": "betterthanmodern:coal_block"
+  }
+}
