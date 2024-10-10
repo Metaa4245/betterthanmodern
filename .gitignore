@@ -21,7 +21,6 @@ build/
 .idea/**/libraries
 *.iws
 out/
-out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
