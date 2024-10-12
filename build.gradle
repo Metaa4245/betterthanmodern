@@ -61,6 +61,9 @@ dependencies {
     implementation "blue.endless:jankson:1.2.3"
 
     modImplementation "net.modificationstation:StationAPI:${project.stapi_version}"
+    modImplementation("com.github.paulevsGitch:BHCreative:${project.bhcreative_version}") {
+        transitive false
+    }
 }
 
 processResources {

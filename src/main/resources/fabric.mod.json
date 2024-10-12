@@ -14,6 +14,9 @@
     "stationapi:event_bus": [
       "me.meta4245.betterthanmodern.event.ItemRegistry",
       "me.meta4245.betterthanmodern.event.BlockRegistry"
+    ],
+    "bhcreative:event_bus": [
+      "me.meta4245.betterthanmodern.event.CreativeRegistry"
     ]
   },
   "mixins": [
@@ -21,5 +24,8 @@
   ],
   "depends": {
     "minecraft": "1.0.0-beta.7.3"
+  },
+  "suggests": {
+    "bhcreative": "*"
   }
 }

@@ -1,5 +1,9 @@
 package me.meta4245.betterthanmodern;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
+
 public abstract class ReflectionHacks {
     public static String get_name(Class<?> clazz) {
         StringBuilder name = new StringBuilder();
@@ -16,5 +20,12 @@ public abstract class ReflectionHacks {
         }
 
         return name.toString();
+    }
+
+    public static List<Field> getFieldsOfType(Class<?> clazz, Class<?> type) {
+        List<Field> allFields = Arrays.asList(clazz.getDeclaredFields());
+        return allFields.stream()
+                .filter(field -> field.getType() == type)
+                .toList();
     }
 }

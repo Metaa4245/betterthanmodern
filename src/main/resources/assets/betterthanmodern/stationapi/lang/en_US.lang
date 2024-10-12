@@ -26,3 +26,5 @@ tile.@.stone_bricks.name=Stone Bricks
 tile.@.coal_block.name=Block of Coal
 tile.@.redstone_block.name=Block of Redstone
 tile.@.melon_block.name=Melon Block
+
+tab.betterthanmodern.tab.name=Better than Modern
