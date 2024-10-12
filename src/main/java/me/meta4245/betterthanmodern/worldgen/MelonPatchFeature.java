@@ -10,8 +10,14 @@ import java.util.Random;
 public class MelonPatchFeature extends Feature {
     public MelonPatchFeature() {}
 
+    public boolean willGenerate(Random random) {
+        return random.nextInt(11) == 5;
+    }
+
     @Override
     public boolean generate(World world, Random random, int x, int y, int z) {
+        if (!willGenerate(random)) return false;
+
         for(int i = 0; i < 64; ++i) {
             int randX = x + random.nextInt(8) - random.nextInt(8);
             int randY = y + random.nextInt(4) - random.nextInt(4);

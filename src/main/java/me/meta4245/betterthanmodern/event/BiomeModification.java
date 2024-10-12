@@ -5,13 +5,11 @@ import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.world.gen.feature.Feature;
 import net.modificationstation.stationapi.api.event.worldgen.biome.BiomeModificationEvent;
 
-public class FeatureRegistry {
-    public static Feature melonPatch;
+public class BiomeModification {
+    public static Feature melonPatch = new MelonPatchFeature();
 
     @EventListener
-    public void registerFeatures(BiomeModificationEvent event) {
-        melonPatch = new MelonPatchFeature();
-
+    public void modifyBiome(BiomeModificationEvent event) {
         event.biome.addFeature(melonPatch);
     }
 }
