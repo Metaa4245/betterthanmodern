@@ -4,6 +4,7 @@ import me.meta4245.betterthanmodern.event.ItemRegistry;
 import me.meta4245.betterthanmodern.mixin.accessor.EntityAccessor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.CreeperEntity;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -38,7 +39,7 @@ public abstract class CreeperEntityMixin {
             ),
             cancellable = true
     )
-    private void onKilledBy(Entity par1, CallbackInfo ci) {
+    private void onKilledBy(Entity par1, @NotNull CallbackInfo ci) {
         EntityAccessor accessor = (EntityAccessor) this;
         Random random = accessor.getRandom();
 

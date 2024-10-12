@@ -3,6 +3,7 @@ package me.meta4245.betterthanmodern.mixin;
 import net.minecraft.block.FarmlandBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,7 +22,7 @@ public abstract class FarmlandBlockMixin {
             int y,
             int z,
             Entity entity,
-            CallbackInfo ci) {
+            @NotNull CallbackInfo ci) {
         ci.cancel();
     }
 }

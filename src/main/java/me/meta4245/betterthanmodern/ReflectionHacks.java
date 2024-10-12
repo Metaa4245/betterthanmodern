@@ -1,11 +1,13 @@
 package me.meta4245.betterthanmodern;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 
 public abstract class ReflectionHacks {
-    public static String get_name(Class<?> clazz) {
+    public static @NotNull String get_name(@NotNull Class<?> clazz) {
         StringBuilder name = new StringBuilder();
         String simpleName = clazz.getSimpleName();
         int len = simpleName.length();
@@ -22,7 +24,7 @@ public abstract class ReflectionHacks {
         return name.toString();
     }
 
-    public static List<Field> getFieldsOfType(Class<?> clazz, Class<?> type) {
+    public static List<Field> getFieldsOfType(@NotNull Class<?> clazz, Class<?> type) {
         List<Field> allFields = Arrays.asList(clazz.getDeclaredFields());
         return allFields.stream()
                 .filter(field -> field.getType() == type)

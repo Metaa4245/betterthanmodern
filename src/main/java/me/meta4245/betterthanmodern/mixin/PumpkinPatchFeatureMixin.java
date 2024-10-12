@@ -4,6 +4,7 @@ import me.meta4245.betterthanmodern.event.BlockRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.PumpkinPatchFeature;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -16,7 +17,7 @@ public class PumpkinPatchFeatureMixin {
     @Inject(method = "generate", at = @At("HEAD"), cancellable = true)
     public void generateMelons(
             World world,
-            Random random,
+            @NotNull Random random,
             int x,
             int y,
             int z,

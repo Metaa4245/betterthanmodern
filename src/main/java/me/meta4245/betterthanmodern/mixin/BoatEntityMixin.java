@@ -5,6 +5,7 @@ import me.meta4245.betterthanmodern.mixin.accessor.EntityAccessor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.item.Item;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
@@ -46,7 +47,7 @@ public class BoatEntityMixin {
     public void dropBoat(
             Entity source,
             int amount,
-            CallbackInfoReturnable<Boolean> cir
+            @NotNull CallbackInfoReturnable<Boolean> cir
     ) {
         EntityAccessor accessor = (EntityAccessor) this;
 

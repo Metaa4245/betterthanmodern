@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.modificationstation.stationapi.api.mod.entrypoint.Entrypoint;
 import net.modificationstation.stationapi.api.util.Namespace;
 import net.modificationstation.stationapi.api.util.Null;
+import org.jetbrains.annotations.NotNull;
 import paulevs.bhcreative.api.CreativeTab;
 import paulevs.bhcreative.api.SimpleTab;
 import paulevs.bhcreative.registry.TabRegistryEvent;
@@ -22,7 +23,7 @@ public class CreativeRegistry {
     public static CreativeTab tab;
 
     @EventListener
-    public void onTabInit(TabRegistryEvent event) {
+    public void onTabInit(@NotNull TabRegistryEvent event) {
         tab = new SimpleTab(NAMESPACE.id("tab"), new ItemStack(ItemRegistry.melonSlice));
         event.register(tab);
 
