@@ -2,16 +2,13 @@
   "schemaVersion": 1,
   "id": "betterthanmodern",
   "version": "${version}",
-
   "name": "Better than Modern",
   "description": "Backport certain modern MC features.",
   "authors": [
     "Meta4245"
   ],
-
   "license": "MIT",
   "icon": "assets/betterthanmodern/icon.png",
-
   "environment": "*",
   "entrypoints": {
     "stationapi:event_bus": [
@@ -22,7 +19,6 @@
   "mixins": [
     "betterthanmodern.mixins.json"
   ],
-
   "depends": {
     "minecraft": "1.0.0-beta.7.3"
   }
