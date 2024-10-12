@@ -10,6 +10,7 @@
     "FarmlandBlockMixin",
     "FurnaceBlockEntityMixin",
     "PigEntityMixin",
+    "PumpkinPatchFeatureMixin",
     "SheepEntityMixin",
     "accessor.EntityAccessor"
   ]
