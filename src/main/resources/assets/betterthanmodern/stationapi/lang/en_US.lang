@@ -6,6 +6,7 @@ item.@.raw_chicken.name=Raw Chicken
 item.@.cooked_chicken.name=Cooked Chicken
 item.@.raw_porkchop.name=Raw Porkchop
 item.@.cooked_porkchop.name=Cooked Porkchop
+item.@.melon_slice.name=Melon Slice
 
 item.@.stal_disc.name=stal
 item.@.blocks_disc.name=blocks
@@ -24,3 +25,4 @@ tile.@.smooth_stone.name=Smooth Stone
 tile.@.stone_bricks.name=Stone Bricks
 tile.@.coal_block.name=Block of Coal
 tile.@.redstone_block.name=Block of Redstone
+tile.@.melon_block.name=Melon Block

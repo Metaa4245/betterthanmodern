@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "mmm",
+    "mmm",
+    "mmm"
+  ],
+  "key": {
+    "c": {
+      "item": "betterthanmodern:melon_slice"
+    }
+  },
+  "result": {
+    "item": "betterthanmodern:melon_block"
+  }
+}

@@ -7,7 +7,7 @@ import net.modificationstation.stationapi.api.util.Identifier;
 public class StoneBricks extends TemplateBlock {
     public StoneBricks(Identifier identifier) {
         super(identifier, Material.STONE);
-        super.setHardness(1.5f);
+        super.setHardness(1.5F);
         super.setResistance(6);
     }
 }

@@ -36,6 +36,7 @@ public class ItemRegistry {
     public static Item rawChicken;
     public static Item rawMutton;
     public static Item rawPorkchop;
+    public static Item melonSlice;
 
     private Item item(Class<? extends Item> clazz) {
         String key = ReflectionHacks.get_name(clazz);
@@ -75,5 +76,6 @@ public class ItemRegistry {
         rawMutton = item(RawMutton.class);
         rawPorkchop = item(RawPorkchop.class);
         rawBeef = item(RawBeef.class);
+        melonSlice = item(MelonSlice.class);
     }
 }
