@@ -14,11 +14,11 @@ import java.util.Random;
 @Mixin(ChickenEntity.class)
 public abstract class ChickenEntityMixin {
     @Inject(
-            method = "getDroppedId",
+            method = "getDroppedItemId",
             at = @At("HEAD"),
             cancellable = true
     )
-    private void getDroppedId(CallbackInfoReturnable<Integer> cir) {
+    private void getDroppedItemId(CallbackInfoReturnable<Integer> cir) {
         EntityAccessor accessor = (EntityAccessor) this;
         Random random = accessor.getRandom();
 
