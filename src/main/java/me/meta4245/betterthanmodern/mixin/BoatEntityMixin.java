@@ -1,11 +1,16 @@
 package me.meta4245.betterthanmodern.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import me.meta4245.betterthanmodern.mixin.accessor.EntityAccessor;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BoatEntity.class)
 public class BoatEntityMixin {
@@ -30,13 +35,23 @@ public class BoatEntityMixin {
         return 1.5D;
     }
 
-    @ModifyConstant(
-            method = "tick",
-            constant = @Constant(
-                    doubleValue = 0.949999988079071
-            )
+    @Inject(
+            method = "damage",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/entity/vehicle/BoatEntity;dropItem(IIF)Lnet/minecraft/entity/ItemEntity;"
+            ),
+            cancellable = true
     )
-    public double modifyYSpeed(double constant) {
-        return 1.45D;
+    public void dropBoat(
+            Entity source,
+            int amount,
+            CallbackInfoReturnable<Boolean> cir
+    ) {
+        EntityAccessor accessor = (EntityAccessor) this;
+
+        accessor.callDropItem(Item.BOAT.id, 1);
+        accessor.callMarkDead();
+        cir.setReturnValue(true);
     }
 }

@@ -18,4 +18,7 @@ public interface EntityAccessor {
 
     @Invoker
     ItemEntity callDropItem(int id, int amount);
+
+    @Invoker
+    void callMarkDead();
 }
