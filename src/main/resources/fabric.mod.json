@@ -13,7 +13,8 @@
   "entrypoints": {
     "stationapi:event_bus": [
       "me.meta4245.betterthanmodern.event.ItemRegistry",
-      "me.meta4245.betterthanmodern.event.BlockRegistry"
+      "me.meta4245.betterthanmodern.event.BlockRegistry",
+      "me.meta4245.betterthanmodern.event.FeatureRegistry"
     ],
     "bhcreative:event_bus": [
       "me.meta4245.betterthanmodern.event.CreativeRegistry"
