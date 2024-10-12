@@ -22,8 +22,15 @@ public abstract class PigEntityMixin {
         Random random = accessor.getRandom();
 
         int porkchopAmount = random.nextInt(1, 4);
+        int id;
 
-        accessor.callDropItem(ItemRegistry.rawPorkchop.id, porkchopAmount);
+        if (accessor.getFireTicks() != 0) {
+            id = ItemRegistry.cookedPorkchop.id;
+        } else {
+            id = ItemRegistry.rawPorkchop.id;
+        }
+
+        accessor.callDropItem(id, porkchopAmount);
 
         // LivingEntity doesn't drop if getDroppedId returns 0
         cir.setReturnValue(0);

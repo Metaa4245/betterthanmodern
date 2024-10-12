@@ -23,9 +23,16 @@ public abstract class ChickenEntityMixin {
         Random random = accessor.getRandom();
 
         int featherAmount = random.nextInt(0, 3);
+        int id;
+
+        if (accessor.getFireTicks() != 0) {
+            id = ItemRegistry.cookedChicken.id;
+        } else {
+            id = ItemRegistry.rawChicken.id;
+        }
 
         accessor.callDropItem(Item.FEATHER.id, featherAmount);
-        accessor.callDropItem(ItemRegistry.rawChicken.id, 1);
+        accessor.callDropItem(id, 1);
 
         // LivingEntity doesn't drop if getDroppedId returns 0
         cir.setReturnValue(0);

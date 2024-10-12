@@ -23,9 +23,16 @@ public abstract class SheepEntityMixin {
         Random random = accessor.getRandom();
 
         int muttonAmount = random.nextInt(1, 3);
+        int id;
+
+        if (accessor.getFireTicks() != 0) {
+            id = ItemRegistry.cookedMutton.id;
+        } else {
+            id = ItemRegistry.rawMutton.id;
+        }
 
         accessor.callDropItem(Block.WOOL.id, 1);
-        accessor.callDropItem(ItemRegistry.rawMutton.id, muttonAmount);
+        accessor.callDropItem(id, muttonAmount);
 
         // LivingEntity doesn't drop if getDroppedId returns 0
         cir.setReturnValue(0);
