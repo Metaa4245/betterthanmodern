@@ -25,39 +25,16 @@ public class RedstoneBlock extends TemplateBlock {
 
     @Override
     public boolean isEmittingRedstonePowerInDirection(BlockView blockView, int x, int y, int z, int direction) {
-        int side = blockView.getBlockMeta(x, y, z);
-        if (side == 5 && direction == 1) {
-            return false;
-        } else if (side == 3 && direction == 3) {
-            return false;
-        } else if (side == 4 && direction == 2) {
-            return false;
-        } else if (side == 1 && direction == 5) {
-            return false;
-        } else {
-            return side != 2 || direction != 4;
-        }
+        return true;
     }
 
     @Override
     public boolean canTransferPowerInDirection(World world, int x, int y, int z, int direction) {
-        return direction == 0
-                &&
-                this.isEmittingRedstonePowerInDirection(
-                        world,
-                        x,
-                        y,
-                        z,
-                        direction
-                );
+        return true;
     }
 
     @Override
     public void onPlaced(World world, int x, int y, int z) {
-        if (world.getBlockMeta(x, y, z) == 0) {
-            super.onPlaced(world, x, y, z);
-        }
-
         world.notifyNeighbors(x, y - 1, z, this.id);
         world.notifyNeighbors(x, y + 1, z, this.id);
         world.notifyNeighbors(x - 1, y, z, this.id);
