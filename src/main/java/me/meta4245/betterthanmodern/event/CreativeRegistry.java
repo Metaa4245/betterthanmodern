@@ -13,9 +13,6 @@ import paulevs.bhcreative.api.CreativeTab;
 import paulevs.bhcreative.api.SimpleTab;
 import paulevs.bhcreative.registry.TabRegistryEvent;
 
-import java.lang.reflect.Field;
-import java.util.List;
-
 public class CreativeRegistry {
     @Entrypoint.Namespace
     private final static Namespace NAMESPACE = Null.get();
@@ -27,23 +24,29 @@ public class CreativeRegistry {
         tab = new SimpleTab(NAMESPACE.id("tab"), new ItemStack(ItemRegistry.melonSlice));
         event.register(tab);
 
-        List<Field> items = ReflectionHacks.getFieldsOfType(ItemRegistry.class, Item.class);
-        List<Field> blocks = ReflectionHacks.getFieldsOfType(BlockRegistry.class, Block.class);
-
-        for (Field f : items) {
-            try {
-                tab.addItem(new ItemStack((Item) f.get(null)));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        for (Field f : blocks) {
-            try {
-                tab.addItem(new ItemStack((Block) f.get(null)));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
+        ReflectionHacks
+                .getFieldsOfType(
+                        ItemRegistry.class,
+                        Item.class
+                )
+                .forEach(f -> {
+                    try {
+                        tab.addItem(new ItemStack((Item) f.get(null)));
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+        ReflectionHacks
+                .getFieldsOfType(
+                        BlockRegistry.class,
+                        Block.class
+                )
+                .forEach(f -> {
+                    try {
+                        tab.addItem(new ItemStack((Block) f.get(null)));
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
     }
 }
