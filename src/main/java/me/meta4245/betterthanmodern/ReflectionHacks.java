@@ -27,7 +27,7 @@ public abstract class ReflectionHacks {
     }
 
     public static @NotNull String class_name(@NotNull Field field) {
-        String name = field.getType().getSimpleName();
+        String name = field.getName();
         return name.substring(0, 1).toUpperCase() + name.substring(1);
     }
 
