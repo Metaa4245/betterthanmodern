@@ -7,7 +7,10 @@ item.@.cooked_chicken.name=Cooked Chicken
 item.@.raw_porkchop.name=Raw Porkchop
 item.@.cooked_porkchop.name=Cooked Porkchop
 item.@.melon_slice.name=Melon Slice
-
+item.@.glistering_melon.name=Glistering Melon Slice
+item.@.carrot.name=Carrot
+item.@.golden_carrot.name=Golden Carrot
+item.@.melon_seeds.name=Melon Seeds
 item.@.stal_disc.name=stal
 item.@.blocks_disc.name=blocks
 item.@.cat_disc.name=cat
@@ -20,11 +23,10 @@ item.@.strad_disc.name=strad
 item.@.thirteen_disc.name=13
 item.@.wait_disc.name=wait
 item.@.ward_disc.name=ward
-
+item.@.gold_nugget.name=Gold Nugget
 tile.@.smooth_stone.name=Smooth Stone
 tile.@.stone_bricks.name=Stone Bricks
 tile.@.coal_block.name=Block of Coal
 tile.@.redstone_block.name=Block of Redstone
-tile.@.melon_block.name=Melon Block
-
+tile.@.melon.name=Melon
 tab.betterthanmodern.tab.name=Better than Modern
