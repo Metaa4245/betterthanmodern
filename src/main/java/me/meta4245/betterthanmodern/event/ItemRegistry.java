@@ -1,15 +1,18 @@
 package me.meta4245.betterthanmodern.event;
 
-import me.meta4245.betterthanmodern.ReflectionHacks;
-import me.meta4245.betterthanmodern.item.disc.*;
-import me.meta4245.betterthanmodern.item.food.*;
 import net.mine_diver.unsafeevents.listener.EventListener;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.modificationstation.stationapi.api.event.registry.ItemRegistryEvent;
 import net.modificationstation.stationapi.api.mod.entrypoint.Entrypoint;
 import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.Namespace;
 import net.modificationstation.stationapi.api.util.Null;
+
+import java.lang.reflect.Field;
+import java.util.List;
+
+import static me.meta4245.betterthanmodern.ReflectionHacks.*;
 
 public class ItemRegistry {
     @Entrypoint.Namespace
@@ -27,7 +30,6 @@ public class ItemRegistry {
     public static Item thirteenDisc;
     public static Item waitDisc;
     public static Item wardDisc;
-
     public static Item cookedChicken;
     public static Item cookedMutton;
     public static Item cookedPorkchop;
@@ -39,7 +41,7 @@ public class ItemRegistry {
     public static Item melonSlice;
 
     private Item item(Class<? extends Item> clazz) {
-        String key = ReflectionHacks.get_name(clazz);
+        String key = namespace_name(clazz);
         Item item;
 
         try {
@@ -55,27 +57,14 @@ public class ItemRegistry {
 
     @EventListener
     public void registerItems(ItemRegistryEvent event) {
-        blocksDisc = item(BlocksDisc.class);
-        catDisc = item(CatDisc.class);
-        chirpDisc = item(ChirpDisc.class);
-        elevenDisc = item(ElevenDisc.class);
-        farDisc = item(FarDisc.class);
-        mallDisc = item(MallDisc.class);
-        mellohiDisc = item(MellohiDisc.class);
-        stalDisc = item(StalDisc.class);
-        stradDisc = item(StradDisc.class);
-        thirteenDisc = item(ThirteenDisc.class);
-        waitDisc = item(WaitDisc.class);
-        wardDisc = item(WardDisc.class);
+        List<Field> fields = getFieldsOfType(BlockRegistry.class, Block.class);
 
-        cookedChicken = item(CookedChicken.class);
-        cookedMutton = item(CookedMutton.class);
-        cookedPorkchop = item(CookedPorkchop.class);
-        steak = item(Steak.class);
-        rawChicken = item(RawChicken.class);
-        rawMutton = item(RawMutton.class);
-        rawPorkchop = item(RawPorkchop.class);
-        rawBeef = item(RawBeef.class);
-        melonSlice = item(MelonSlice.class);
+        for (Field f : fields) {
+            try {
+                f.set(null, item(item_class(class_name(f))));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }

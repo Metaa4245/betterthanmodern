@@ -1,6 +1,5 @@
 package me.meta4245.betterthanmodern.event;
 
-import me.meta4245.betterthanmodern.ReflectionHacks;
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -16,6 +15,8 @@ import paulevs.bhcreative.registry.TabRegistryEvent;
 import java.lang.reflect.Field;
 import java.util.List;
 
+import static me.meta4245.betterthanmodern.ReflectionHacks.getFieldsOfType;
+
 public class CreativeRegistry {
     @Entrypoint.Namespace
     private final static Namespace NAMESPACE = Null.get();
@@ -27,8 +28,8 @@ public class CreativeRegistry {
         tab = new SimpleTab(NAMESPACE.id("tab"), new ItemStack(ItemRegistry.melonSlice));
         event.register(tab);
 
-        List<Field> items = ReflectionHacks.getFieldsOfType(ItemRegistry.class, Item.class);
-        List<Field> blocks = ReflectionHacks.getFieldsOfType(BlockRegistry.class, Block.class);
+        List<Field> items = getFieldsOfType(ItemRegistry.class, Item.class);
+        List<Field> blocks = getFieldsOfType(BlockRegistry.class, Block.class);
 
         for (Field f : items) {
             try {

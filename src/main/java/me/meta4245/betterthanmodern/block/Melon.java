@@ -7,8 +7,8 @@ import net.modificationstation.stationapi.api.util.Identifier;
 
 import java.util.Random;
 
-public class MelonBlock extends TemplateBlock {
-    public MelonBlock(Identifier identifier) {
+public class Melon extends TemplateBlock {
+    public Melon(Identifier identifier) {
         super(identifier, Material.PUMPKIN);
         super.setHardness(1);
     }
