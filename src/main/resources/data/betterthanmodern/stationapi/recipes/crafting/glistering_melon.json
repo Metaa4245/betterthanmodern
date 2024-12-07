@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ggg",
+    "gmg",
+    "ggg"
+  ],
+  "key": {
+    "g": {
+      "item": "betterthanmodern:gold_nugget"
+    },
+    "m": {
+      "item": "betterthanmodern:melon_slice"
+    }
+  },
+  "result": {
+    "item": "betterthanmodern:glistering_melon"
+  }
+}

@@ -19,12 +19,17 @@ public class ItemRegistry {
     private final static Namespace NAMESPACE = Null.get();
 
     public static Item blocksDisc;
+    public static Item carrot;
     public static Item catDisc;
     public static Item chirpDisc;
     public static Item elevenDisc;
     public static Item farDisc;
+    public static Item glisteringMelon;
+    public static Item goldenCarrot;
+    public static Item goldNugget;
     public static Item mallDisc;
     public static Item mellohiDisc;
+    public static Item melonSeeds;
     public static Item stalDisc;
     public static Item stradDisc;
     public static Item thirteenDisc;
