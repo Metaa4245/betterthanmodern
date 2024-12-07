@@ -62,7 +62,7 @@ public class ItemRegistry {
 
     @EventListener
     public void registerItems(ItemRegistryEvent event) {
-        List<Field> fields = getFieldsOfType(BlockRegistry.class, Block.class);
+        List<Field> fields = getFieldsOfType(ItemRegistry.class, Block.class);
 
         for (Field f : fields) {
             try {
