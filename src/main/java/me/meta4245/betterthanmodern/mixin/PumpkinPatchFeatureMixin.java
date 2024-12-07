@@ -23,28 +23,28 @@ public class PumpkinPatchFeatureMixin {
             int z,
             CallbackInfoReturnable<Boolean> cir
     ) {
-        if (random.nextBoolean()) {
-            for (int i = 0; i < 64; ++i) {
-                int randX = x + random.nextInt(8) - random.nextInt(8);
-                int randY = y + random.nextInt(4) - random.nextInt(4);
-                int randZ = z + random.nextInt(8) - random.nextInt(8);
+        Block block = random.nextBoolean() ? BlockRegistry.melon : Block.PUMPKIN;
 
-                Block melon = BlockRegistry.melonBlock;
-                boolean isAir = world.isAir(randX, randY, randZ);
-                boolean canPlace = melon.canPlaceAt(world, randX, randY, randZ);
-                int blockId = world.getBlockId(randX, randY - 1, randZ);
+        for (int i = 0; i < 64; ++i) {
+            int randX = x + random.nextInt(8) - random.nextInt(8);
+            int randY = y + random.nextInt(4) - random.nextInt(4);
+            int randZ = z + random.nextInt(8) - random.nextInt(8);
 
-                if (isAir && blockId == Block.GRASS_BLOCK.id && canPlace) {
-                    world.setBlockWithoutNotifyingNeighbors(
-                            randX,
-                            randY,
-                            randZ,
-                            melon.id,
-                            random.nextInt(4)
-                    );
-                }
+            boolean isAir = world.isAir(randX, randY, randZ);
+            boolean canPlace = block.canPlaceAt(world, randX, randY, randZ);
+            int blockId = world.getBlockId(randX, randY - 1, randZ);
+
+            if (isAir && blockId == Block.GRASS_BLOCK.id && canPlace) {
+                world.setBlockWithoutNotifyingNeighbors(
+                        randX,
+                        randY,
+                        randZ,
+                        block.id,
+                        random.nextInt(4)
+                );
             }
-            cir.setReturnValue(true);
         }
+
+        cir.setReturnValue(true);
     }
 }
