@@ -4,6 +4,7 @@
   "package": "me.meta4245.betterthanmodern.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AxeItemMixin",
     "BoatEntityMixin",
     "ChickenEntityMixin",
     "CowEntityMixin",
@@ -14,6 +15,7 @@
     "PumpkinPatchFeatureMixin",
     "SheepEntityMixin",
     "ShovelItemMixin",
-    "accessor.EntityAccessor"
+    "accessor.EntityAccessor",
+    "accessor.ToolItemAccessor"
   ]
 }
