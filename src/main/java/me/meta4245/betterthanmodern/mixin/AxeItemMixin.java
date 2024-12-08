@@ -1,7 +1,7 @@
 package me.meta4245.betterthanmodern.mixin;
 
 import com.google.common.reflect.ClassPath;
-import me.meta4245.betterthanmodern.annotation.Pickaxe;
+import me.meta4245.betterthanmodern.annotation.Axe;
 import me.meta4245.betterthanmodern.event.BlockRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.AxeItem;
@@ -37,7 +37,7 @@ public abstract class AxeItemMixin {
                     .getAllClasses()
                     .stream()
                     .filter(clazz -> clazz.getPackageName().startsWith("me.meta4245.betterthanmodern.block"))
-                    .filter(clazz -> clazz.getClass().isAnnotationPresent(Pickaxe.class))
+                    .filter(clazz -> clazz.getClass().isAnnotationPresent(Axe.class))
                     .map(ClassPath.ClassInfo::load)
                     .collect(Collectors.toSet());
         } catch (Exception e) {

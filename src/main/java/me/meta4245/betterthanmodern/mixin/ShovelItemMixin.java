@@ -1,7 +1,7 @@
 package me.meta4245.betterthanmodern.mixin;
 
 import com.google.common.reflect.ClassPath;
-import me.meta4245.betterthanmodern.annotation.Pickaxe;
+import me.meta4245.betterthanmodern.annotation.Shovel;
 import me.meta4245.betterthanmodern.event.BlockRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.ShovelItem;
@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +37,7 @@ public abstract class ShovelItemMixin {
                     .getAllClasses()
                     .stream()
                     .filter(clazz -> clazz.getPackageName().startsWith("me.meta4245.betterthanmodern.block"))
-                    .filter(clazz -> clazz.getClass().isAnnotationPresent(Pickaxe.class))
+                    .filter(clazz -> clazz.getClass().isAnnotationPresent(Shovel.class))
                     .map(ClassPath.ClassInfo::load)
                     .collect(Collectors.toSet());
         } catch (Exception e) {
