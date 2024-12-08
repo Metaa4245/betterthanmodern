@@ -59,9 +59,4 @@ public abstract class ShovelItemMixin {
 
         shovelEffectiveBlocks = blocks.toArray(new Block[0]);
     }
-
-    @Inject(method = "isSuitableFor", at = @At("HEAD"), cancellable = true)
-    public void isSuitableFor(Block block, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(block == Block.SNOW || block == Block.SNOW_BLOCK);
-    }
 }
