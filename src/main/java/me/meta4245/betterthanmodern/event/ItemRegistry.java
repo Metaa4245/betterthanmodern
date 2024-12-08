@@ -1,7 +1,6 @@
 package me.meta4245.betterthanmodern.event;
 
 import net.mine_diver.unsafeevents.listener.EventListener;
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.modificationstation.stationapi.api.event.registry.ItemRegistryEvent;
 import net.modificationstation.stationapi.api.mod.entrypoint.Entrypoint;
@@ -62,7 +61,7 @@ public class ItemRegistry {
 
     @EventListener
     public void registerItems(ItemRegistryEvent event) {
-        List<Field> fields = getFieldsOfType(ItemRegistry.class, Block.class);
+        List<Field> fields = getFieldsOfType(ItemRegistry.class, Item.class);
 
         for (Field f : fields) {
             try {
