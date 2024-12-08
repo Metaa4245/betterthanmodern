@@ -31,6 +31,11 @@ public abstract class ReflectionHacks {
         return name.substring(0, 1).toUpperCase() + name.substring(1);
     }
 
+    public static @NotNull String field_name(@NotNull Class<?> clazz) {
+        String name = clazz.getSimpleName();
+        return name.substring(0, 1).toLowerCase() + name.substring(1);
+    }
+
     public static @NotNull Class<? extends TemplateItem> item_class(@NotNull String name) throws ClassNotFoundException {
         return (Class<? extends TemplateItem>) Class.forName("me.meta4245.betterthanmodern.item." + name);
     }

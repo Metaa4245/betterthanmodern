@@ -17,6 +17,9 @@
     ],
     "bhcreative:event_bus": [
       "me.meta4245.betterthanmodern.event.CreativeRegistry"
+    ],
+    "main": [
+      "me.meta4245.betterthanmodern.Mod"
     ]
   },
   "mixins": [

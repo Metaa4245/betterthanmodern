@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ggg",
+    "ggg",
+    "ggg"
+  ],
+  "key": {
+    "g": {
+      "item": "betterthanmodern:gold_nugget"
+    }
+  },
+  "result": {
+    "item": "minecraft:gold_ingot"
+  }
+}

@@ -9,6 +9,7 @@
     "CowEntityMixin",
     "CreeperEntityMixin",
     "FarmlandBlockMixin",
+    "PickaxeItemMixin",
     "PigEntityMixin",
     "PumpkinPatchFeatureMixin",
     "SheepEntityMixin",
