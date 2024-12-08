@@ -9,12 +9,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.PickaxeItem;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -78,19 +78,17 @@ public abstract class PickaxeItemMixin {
         pickaxeEffectiveBlocks = blocks.toArray(new Block[0]);
     }
 
-    /**
-     * @author Metaa4245
-     * @reason MC code is horrid
-     */
-    @Overwrite()
-    public boolean isSuitableFor(Block block) {
+    @Inject(method = "isSuitableFor", at = @At("HEAD"), cancellable = true)
+    public void isSuitableFor(Block block, CallbackInfoReturnable<Boolean> cir) {
         ToolItemAccessor accessor = (ToolItemAccessor) this;
 
         Integer tier = tiers.get(block);
         if (tier == null) {
-            return block.material == Material.STONE || block.material == Material.METAL;
+            cir.setReturnValue(block.material == Material.STONE || block.material == Material.METAL);
+            // IntelliJ don't warn please
+            return;
         }
 
-        return tier >= accessor.getToolMaterial().getMiningLevel();
+        cir.setReturnValue(tier >= accessor.getToolMaterial().getMiningLevel());
     }
 }

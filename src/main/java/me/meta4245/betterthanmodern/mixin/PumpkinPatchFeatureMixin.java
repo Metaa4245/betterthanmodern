@@ -6,24 +6,22 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.PumpkinPatchFeature;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Random;
 
 @Mixin(PumpkinPatchFeature.class)
 public class PumpkinPatchFeatureMixin {
-    /**
-     * @author Metaa4245
-     * @reason it's just cleaner this way
-     */
-    @Overwrite()
-    public boolean generate(
+    @Inject(method = "generate", at = @At("HEAD"), cancellable = true)
+    public void generateMelons(
             World world,
             @NotNull Random random,
             int x,
             int y,
-            int z
+            int z,
+            CallbackInfoReturnable<Boolean> cir
     ) {
         Block block = random.nextBoolean() ? BlockRegistry.melon : Block.PUMPKIN;
 
@@ -47,6 +45,6 @@ public class PumpkinPatchFeatureMixin {
             }
         }
 
-        return true;
+        cir.setReturnValue(true);
     }
 }

@@ -7,11 +7,11 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ShovelItem;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -57,12 +57,8 @@ public abstract class ShovelItemMixin {
         shovelEffectiveBlocks = blocks.toArray(new Block[0]);
     }
 
-    /**
-     * @author Metaa4245
-     * @reason MC code is horrid
-     */
-    @Overwrite()
-    public boolean isSuitableFor(Block block) {
-        return block == Block.SNOW || block == Block.SNOW_BLOCK;
+    @Inject(method = "isSuitableFor", at = @At("HEAD"), cancellable = true)
+    public void isSuitableFor(Block block, CallbackInfoReturnable<Boolean> cir) {
+        cir.setReturnValue(block == Block.SNOW || block == Block.SNOW_BLOCK);
     }
 }
