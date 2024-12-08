@@ -3,15 +3,12 @@ package me.meta4245.betterthanmodern.mixin;
 import com.google.common.reflect.ClassPath;
 import me.meta4245.betterthanmodern.annotation.Pickaxe;
 import me.meta4245.betterthanmodern.event.BlockRegistry;
-import me.meta4245.betterthanmodern.mixin.accessor.ToolItemAccessor;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.PickaxeItem;
+import net.minecraft.item.ShovelItem;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -21,31 +18,14 @@ import java.util.stream.Collectors;
 
 import static me.meta4245.betterthanmodern.ReflectionHacks.field_name;
 
-@Mixin(PickaxeItem.class)
-public abstract class PickaxeItemMixin {
-    @Unique
-    private static final Map<Block, Integer> tiers = new HashMap<>(
-            Map.ofEntries(
-                    Map.entry(Block.OBSIDIAN, 3),
-                    Map.entry(Block.DIAMOND_BLOCK, 2),
-                    Map.entry(Block.DIAMOND_ORE, 2),
-                    Map.entry(Block.GOLD_BLOCK, 2),
-                    Map.entry(Block.GOLD_ORE, 2),
-                    Map.entry(Block.REDSTONE_ORE, 2),
-                    Map.entry(Block.LIT_REDSTONE_ORE, 2),
-                    Map.entry(Block.IRON_BLOCK, 1),
-                    Map.entry(Block.IRON_ORE, 1),
-                    Map.entry(Block.LAPIS_BLOCK, 1),
-                    Map.entry(Block.LAPIS_ORE, 1)
-            )
-    );
-
+@Mixin(ShovelItem.class)
+public abstract class ShovelItemMixin {
     @Shadow
-    private static Block[] pickaxeEffectiveBlocks;
+    private static Block[] shovelEffectiveBlocks;
 
     @Inject(method = "<clinit>", at = @At(
             value = "FIELD",
-            target = "Lnet/minecraft/item/PickaxeItem;pickaxeEffectiveBlocks:[Lnet/minecraft/block/Block;",
+            target = "Lnet/minecraft/item/ShovelItem;shovelEffectiveBlocks:[Lnet/minecraft/block/Block;",
             opcode = Opcodes.PUTSTATIC,
             shift = At.Shift.AFTER))
     private static void append(CallbackInfo ci) {
@@ -62,7 +42,7 @@ public abstract class PickaxeItemMixin {
             throw new RuntimeException(e);
         }
 
-        List<Block> blocks = new ArrayList<>(Arrays.asList(pickaxeEffectiveBlocks));
+        List<Block> blocks = new ArrayList<>(Arrays.asList(shovelEffectiveBlocks));
         for (Class<?> c : classes) {
             Block block;
             try {
@@ -72,10 +52,9 @@ public abstract class PickaxeItemMixin {
             }
 
             blocks.add(block);
-            tiers.put(block, block.getClass().getAnnotation(Pickaxe.class).tier());
         }
 
-        pickaxeEffectiveBlocks = blocks.toArray(new Block[0]);
+        shovelEffectiveBlocks = blocks.toArray(new Block[0]);
     }
 
     /**
@@ -84,13 +63,6 @@ public abstract class PickaxeItemMixin {
      */
     @Overwrite()
     public boolean isSuitableFor(Block block) {
-        ToolItemAccessor accessor = (ToolItemAccessor) this;
-
-        Integer tier = tiers.get(block);
-        if (tier == null) {
-            return block.material == Material.STONE || block.material == Material.METAL;
-        }
-
-        return tier >= accessor.getToolMaterial().getMiningLevel();
+        return block == Block.SNOW || block == Block.SNOW_BLOCK;
     }
 }
