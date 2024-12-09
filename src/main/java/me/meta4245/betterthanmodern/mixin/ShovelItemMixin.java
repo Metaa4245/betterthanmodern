@@ -1,6 +1,7 @@
 package me.meta4245.betterthanmodern.mixin;
 
 import com.google.common.reflect.ClassPath;
+import me.meta4245.betterthanmodern.annotation.Axe;
 import me.meta4245.betterthanmodern.annotation.Shovel;
 import me.meta4245.betterthanmodern.event.BlockRegistry;
 import net.minecraft.block.Block;
@@ -34,7 +35,10 @@ public abstract class ShovelItemMixin {
     private static void append(CallbackInfo ci) {
         List<Class<?>> classes;
         try {
-            classes = getBlocks();
+            classes = getBlocks()
+                    .stream()
+                    .filter(clazz -> clazz.isAnnotationPresent(Shovel.class))
+                    .toList();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

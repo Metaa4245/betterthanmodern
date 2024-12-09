@@ -34,7 +34,10 @@ public abstract class AxeItemMixin {
     private static void append(CallbackInfo ci) {
         List<Class<?>> classes;
         try {
-            classes = getBlocks();
+            classes = getBlocks()
+                    .stream()
+                    .filter(clazz -> clazz.isAnnotationPresent(Axe.class))
+                    .toList();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
