@@ -1,7 +1,5 @@
 package me.meta4245.betterthanmodern.mixin;
 
-import com.google.common.reflect.ClassPath;
-import me.meta4245.betterthanmodern.annotation.Axe;
 import me.meta4245.betterthanmodern.annotation.Shovel;
 import me.meta4245.betterthanmodern.event.BlockRegistry;
 import net.minecraft.block.Block;
@@ -16,8 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import static me.meta4245.betterthanmodern.ReflectionHacks.field_name;
 import static me.meta4245.betterthanmodern.ReflectionHacks.getBlocks;

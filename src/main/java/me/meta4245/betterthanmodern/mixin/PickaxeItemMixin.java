@@ -1,7 +1,5 @@
 package me.meta4245.betterthanmodern.mixin;
 
-import com.google.common.reflect.ClassPath;
-import me.meta4245.betterthanmodern.annotation.Axe;
 import me.meta4245.betterthanmodern.annotation.Pickaxe;
 import me.meta4245.betterthanmodern.event.BlockRegistry;
 import me.meta4245.betterthanmodern.mixin.accessor.ToolItemAccessor;
@@ -18,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static me.meta4245.betterthanmodern.ReflectionHacks.field_name;
 import static me.meta4245.betterthanmodern.ReflectionHacks.getBlocks;

@@ -10,7 +10,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 public abstract class ReflectionHacks {
     public static @NotNull String namespace_name(@NotNull Class<?> clazz) {
