@@ -19,6 +19,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static me.meta4245.betterthanmodern.ReflectionHacks.field_name;
+import static me.meta4245.betterthanmodern.ReflectionHacks.getBlocks;
 
 @Mixin(AxeItem.class)
 public abstract class AxeItemMixin {
@@ -31,15 +32,9 @@ public abstract class AxeItemMixin {
             opcode = Opcodes.PUTSTATIC,
             shift = At.Shift.AFTER))
     private static void append(CallbackInfo ci) {
-        Set<Class<?>> classes;
+        List<Class<?>> classes;
         try {
-            classes = ClassPath.from(ClassLoader.getSystemClassLoader())
-                    .getAllClasses()
-                    .stream()
-                    .filter(clazz -> clazz.getPackageName().startsWith("me.meta4245.betterthanmodern.block"))
-                    .filter(clazz -> clazz.getClass().isAnnotationPresent(Axe.class))
-                    .map(ClassPath.ClassInfo::load)
-                    .collect(Collectors.toSet());
+            classes = getBlocks();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -48,7 +43,7 @@ public abstract class AxeItemMixin {
         for (Class<?> c : classes) {
             Block block;
             try {
-                block = (Block) BlockRegistry.class.getField(field_name(c)).get(null);
+                block = (Block) BlockRegistry.class.getDeclaredField(field_name(c)).get(null);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

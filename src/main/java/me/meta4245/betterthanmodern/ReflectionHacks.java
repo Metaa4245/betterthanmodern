@@ -1,12 +1,16 @@
 package me.meta4245.betterthanmodern;
 
+import me.meta4245.betterthanmodern.event.BlockRegistry;
+import net.minecraft.block.Block;
 import net.modificationstation.stationapi.api.template.block.TemplateBlock;
 import net.modificationstation.stationapi.api.template.item.TemplateItem;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public abstract class ReflectionHacks {
     public static @NotNull String namespace_name(@NotNull Class<?> clazz) {
@@ -49,5 +53,16 @@ public abstract class ReflectionHacks {
         return allFields.stream()
                 .filter(field -> field.getType() == type)
                 .toList();
+    }
+
+    public static List<Class<?>> getBlocks() throws ClassNotFoundException {
+        List<Class<?>> classes = new ArrayList<>();
+        List<Field> fields = getFieldsOfType(BlockRegistry.class, Block.class);
+
+        for (Field f : fields) {
+            classes.add(block_class(class_name(f)));
+        }
+
+        return classes;
     }
 }
