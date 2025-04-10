@@ -1,9 +1,11 @@
 package me.meta4245.betterthanmodern.event;
 
+import me.meta4245.betterthanmodern.annotation.Fuel;
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.block.Block;
 import net.modificationstation.stationapi.api.event.registry.BlockRegistryEvent;
 import net.modificationstation.stationapi.api.mod.entrypoint.Entrypoint;
+import net.modificationstation.stationapi.api.recipe.FuelRegistry;
 import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.Namespace;
 import net.modificationstation.stationapi.api.util.Null;
@@ -44,7 +46,14 @@ public class BlockRegistry {
 
         for (Field f : fields) {
             try {
-                f.set(null, block(block_class(class_name(f))));
+                Class<? extends Block> clazz = block_class(class_name(f));
+                f.set(null, block(clazz));
+
+                Fuel anno = clazz.getAnnotation(Fuel.class);
+                if (anno != null) {
+                    Block fieldBlock = (Block)f.get(null);
+                    FuelRegistry.addFuelItem(fieldBlock.asItem(), anno.value());
+                }
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

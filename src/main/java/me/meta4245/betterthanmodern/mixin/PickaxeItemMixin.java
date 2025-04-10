@@ -63,7 +63,7 @@ public abstract class PickaxeItemMixin {
             }
 
             blocks.add(block);
-            tiers.put(block, block.getClass().getAnnotation(Pickaxe.class).tier());
+            tiers.put(block, block.getClass().getAnnotation(Pickaxe.class).value());
         }
 
         pickaxeEffectiveBlocks = blocks.toArray(new Block[0]);
