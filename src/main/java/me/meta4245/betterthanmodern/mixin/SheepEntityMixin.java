@@ -25,7 +25,7 @@ public abstract class SheepEntityMixin {
         int muttonAmount = random.nextInt(1, 3);
         int id;
 
-        if (accessor.getFireTicks() != 0) {
+        if (accessor.getFireTicks() > 0) {
             id = ItemRegistry.cookedMutton.id;
         } else {
             id = ItemRegistry.rawMutton.id;

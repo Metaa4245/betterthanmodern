@@ -15,7 +15,7 @@ import static me.meta4245.betterthanmodern.ReflectionHacks.*;
 
 public class ItemRegistry {
     @Entrypoint.Namespace
-    public final static Namespace NAMESPACE = Null.get();
+    public static Namespace NAMESPACE = Null.get();
 
     public static Item blocksDisc;
     public static Item carrot;

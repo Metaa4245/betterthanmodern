@@ -24,7 +24,7 @@ public abstract class PigEntityMixin {
         int porkchopAmount = random.nextInt(1, 4);
         int id;
 
-        if (accessor.getFireTicks() != 0) {
+        if (accessor.getFireTicks() > 0) {
             id = ItemRegistry.cookedPorkchop.id;
         } else {
             id = ItemRegistry.rawPorkchop.id;

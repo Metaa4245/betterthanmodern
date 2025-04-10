@@ -15,7 +15,7 @@ import static me.meta4245.betterthanmodern.ReflectionHacks.*;
 
 public class BlockRegistry {
     @Entrypoint.Namespace
-    public static final Namespace NAMESPACE = Null.get();
+    public static Namespace NAMESPACE = Null.get();
 
     public static Block smoothStone;
     public static Block coalBlock;

@@ -26,7 +26,7 @@ public abstract class CowEntityMixin {
         int beefAmount = random.nextInt(1, 4);
         int id;
 
-        if (accessor.getFireTicks() != 0) {
+        if (accessor.getFireTicks() > 0) {
             id = ItemRegistry.steak.id;
         } else {
             id = ItemRegistry.rawBeef.id;

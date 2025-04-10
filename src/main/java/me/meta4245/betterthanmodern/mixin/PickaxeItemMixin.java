@@ -6,7 +6,6 @@ import me.meta4245.betterthanmodern.mixin.accessor.ToolItemAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.PickaxeItem;
-import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -31,7 +30,7 @@ public abstract class PickaxeItemMixin {
                     Map.entry(Block.GOLD_BLOCK, 2),
                     Map.entry(Block.GOLD_ORE, 2),
                     Map.entry(Block.REDSTONE_ORE, 2),
-                    Map.entry(Block.LIT_REDSTONE_ORE, 2),
+                    Map.entry(Block.LIT_REDSTONE_ORE,2),
                     Map.entry(Block.IRON_BLOCK, 1),
                     Map.entry(Block.IRON_ORE, 1),
                     Map.entry(Block.LAPIS_BLOCK, 1),
@@ -42,11 +41,7 @@ public abstract class PickaxeItemMixin {
     @Shadow
     private static Block[] pickaxeEffectiveBlocks;
 
-    @Inject(method = "<clinit>", at = @At(
-            value = "FIELD",
-            target = "Lnet/minecraft/item/PickaxeItem;pickaxeEffectiveBlocks:[Lnet/minecraft/block/Block;",
-            opcode = Opcodes.PUTSTATIC,
-            shift = At.Shift.AFTER))
+    @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void append(CallbackInfo ci) {
         List<Class<?>> classes;
         try {

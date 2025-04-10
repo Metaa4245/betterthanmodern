@@ -25,7 +25,7 @@ public abstract class ChickenEntityMixin {
         int featherAmount = random.nextInt(0, 3);
         int id;
 
-        if (accessor.getFireTicks() != 0) {
+        if (accessor.getFireTicks() > 0) {
             id = ItemRegistry.cookedChicken.id;
         } else {
             id = ItemRegistry.rawChicken.id;
