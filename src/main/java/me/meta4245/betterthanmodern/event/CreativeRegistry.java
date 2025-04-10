@@ -19,7 +19,7 @@ import static me.meta4245.betterthanmodern.ReflectionHacks.getFieldsOfType;
 
 public class CreativeRegistry {
     @Entrypoint.Namespace
-    private final static Namespace NAMESPACE = Null.get();
+    public final static Namespace NAMESPACE = Null.get();
 
     public static CreativeTab tab;
 
