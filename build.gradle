@@ -40,6 +40,11 @@ repositories {
         name = 'Jitpack'
         url = 'https://jitpack.io'
     }
+    // Used for SpawnEggs
+    maven {
+        name = "NyaRepo"
+        url = "https://maven.fildand.cz/releases"
+    }
     exclusiveContent {
         forRepository {
             maven {
@@ -66,6 +71,12 @@ dependencies {
         transitive false
     }
     modImplementation("com.github.paulevsGitch:BHCreative:${project.bhcreative_version}") {
+        transitive false
+    }
+    modImplementation("maven.modrinth:retrocommands:${project.retrocommands_version}") {
+        transitive false
+    }
+    modImplementation("net.danygames2014:spawneggs:${project.spawneggs_version}") {
         transitive false
     }
 }
