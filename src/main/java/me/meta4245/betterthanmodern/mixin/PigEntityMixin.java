@@ -22,13 +22,9 @@ public abstract class PigEntityMixin {
         Random random = accessor.getRandom();
 
         int porkchopAmount = random.nextInt(1, 4);
-        int id;
-
-        if (accessor.getFireTicks() > 0) {
-            id = ItemRegistry.cookedPorkchop.id;
-        } else {
-            id = ItemRegistry.rawPorkchop.id;
-        }
+        int id = accessor.getFireTicks() > 0
+                ? ItemRegistry.cookedPorkchop.id
+                : ItemRegistry.rawPorkchop.id;
 
         accessor.callDropItem(id, porkchopAmount);
 

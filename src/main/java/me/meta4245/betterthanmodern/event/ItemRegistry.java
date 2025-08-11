@@ -8,9 +8,6 @@ import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.Namespace;
 import net.modificationstation.stationapi.api.util.Null;
 
-import java.lang.reflect.Field;
-import java.util.List;
-
 import static me.meta4245.betterthanmodern.ReflectionHacks.*;
 
 public class ItemRegistry {
@@ -45,7 +42,7 @@ public class ItemRegistry {
     public static Item melonSlice;
 
     private Item item(Class<? extends Item> clazz) {
-        String key = namespace_name(clazz);
+        String key = namespaceName(clazz);
         Item item;
 
         try {
@@ -61,14 +58,12 @@ public class ItemRegistry {
 
     @EventListener
     public void registerItems(ItemRegistryEvent event) {
-        List<Field> fields = getFieldsOfType(ItemRegistry.class, Item.class);
-
-        for (Field f : fields) {
+        getFieldsOfType(ItemRegistry.class, Item.class).forEach(f -> {
             try {
-                f.set(null, item(item_class(class_name(f))));
+                f.set(null, item(itemClass(className(f))));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        }
+        });
     }
 }

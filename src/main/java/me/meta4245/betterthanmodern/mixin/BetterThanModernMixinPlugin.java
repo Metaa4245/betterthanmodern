@@ -11,22 +11,28 @@ import java.util.Set;
 public final class BetterThanModernMixinPlugin implements IMixinConfigPlugin {
 
     @Override
-    public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.equals("me.meta4245.betterthanmodern.mixin.CreeperEntityMixin")) {
-            if (FabricLoader.getInstance().isModLoaded("musicdiscs")) {
-                System.out.println("MusicDisc mod detected! Using music discs from MusicDisc mod instead of BetterThanModern.");
-                return false;
-            }
+    public boolean shouldApplyMixin(
+            String targetClassName,
+            String mixinClassName
+    ) {
+        if (!mixinClassName.equals("me.meta4245.betterthanmodern.mixin.CreeperEntityMixin")) {
+            return true;
         }
 
-        return true;
+        if (!FabricLoader.getInstance().isModLoaded("musicdiscs")) {
+            return true;
+        }
+
+        System.out.println(
+                "MusicDisc mod detected! Using music discs from MusicDisc mod instead of BetterThanModern."
+        );
+        return false;
     }
 
     // Boilerplate
 
     @Override
     public void onLoad(String mixinPackage) {
-
     }
 
     @Override
@@ -35,8 +41,10 @@ public final class BetterThanModernMixinPlugin implements IMixinConfigPlugin {
     }
 
     @Override
-    public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) {
-
+    public void acceptTargets(
+            Set<String> myTargets,
+            Set<String> otherTargets
+    ) {
     }
 
     @Override
@@ -45,12 +53,20 @@ public final class BetterThanModernMixinPlugin implements IMixinConfigPlugin {
     }
 
     @Override
-    public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
-
+    public void preApply(
+            String targetClassName,
+            ClassNode targetClass,
+            String mixinClassName,
+            IMixinInfo mixinInfo
+    ) {
     }
 
     @Override
-    public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
-
+    public void postApply(
+            String targetClassName,
+            ClassNode targetClass,
+            String mixinClassName,
+            IMixinInfo mixinInfo
+    ) {
     }
 }

@@ -7,12 +7,11 @@ import net.modificationstation.stationapi.api.template.item.TemplateItem;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public abstract class ReflectionHacks {
-    public static @NotNull String namespace_name(@NotNull Class<?> clazz) {
+    public static @NotNull String namespaceName(@NotNull Class<?> clazz) {
         StringBuilder name = new StringBuilder();
         String simpleName = clazz.getSimpleName();
         int len = simpleName.length();
@@ -29,39 +28,40 @@ public abstract class ReflectionHacks {
         return name.toString();
     }
 
-    public static @NotNull String class_name(@NotNull Field field) {
+    public static @NotNull String className(@NotNull Field field) {
         String name = field.getName();
         return name.substring(0, 1).toUpperCase() + name.substring(1);
     }
 
-    public static @NotNull String field_name(@NotNull Class<?> clazz) {
+    public static @NotNull String fieldName(@NotNull Class<?> clazz) {
         String name = clazz.getSimpleName();
         return name.substring(0, 1).toLowerCase() + name.substring(1);
     }
 
-    public static @NotNull Class<? extends TemplateItem> item_class(@NotNull String name) throws ClassNotFoundException {
+    public static @NotNull Class<? extends TemplateItem> itemClass(@NotNull String name) throws ClassNotFoundException {
         return (Class<? extends TemplateItem>) Class.forName("me.meta4245.betterthanmodern.item." + name);
     }
 
-    public static @NotNull Class<? extends TemplateBlock> block_class(@NotNull String name) throws ClassNotFoundException {
+    public static @NotNull Class<? extends TemplateBlock> blockClass(@NotNull String name) throws ClassNotFoundException {
         return (Class<? extends TemplateBlock>) Class.forName("me.meta4245.betterthanmodern.block." + name);
     }
 
     public static List<Field> getFieldsOfType(@NotNull Class<?> clazz, Class<?> type) {
-        List<Field> allFields = Arrays.asList(clazz.getDeclaredFields());
-        return allFields.stream()
-                .filter(field -> field.getType() == type)
+        return Arrays.stream(clazz.getDeclaredFields())
+                .filter(f -> f.getType() == type)
                 .toList();
     }
 
-    public static List<Class<?>> getBlocks() throws ClassNotFoundException {
-        List<Class<?>> classes = new ArrayList<>();
-        List<Field> fields = getFieldsOfType(BlockRegistry.class, Block.class);
-
-        for (Field f : fields) {
-            classes.add(block_class(class_name(f)));
-        }
-
-        return classes;
+    public static List<? extends Class<? extends TemplateBlock>> getBlocks() {
+        return getFieldsOfType(BlockRegistry.class, Block.class)
+                .stream()
+                .map(f -> {
+                    try {
+                        return blockClass(className(f));
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .toList();
     }
 }

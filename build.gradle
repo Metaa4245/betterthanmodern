@@ -67,6 +67,7 @@ dependencies {
     implementation "blue.endless:jankson:1.2.3"
 
     modImplementation "net.modificationstation:StationAPI:${project.stapi_version}"
+
     modRuntimeOnly ("maven.modrinth:fast-stapi-intro:${project.stapi_fast_intro_version}") {
         transitive false
     }

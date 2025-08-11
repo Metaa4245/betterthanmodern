@@ -11,11 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static me.meta4245.betterthanmodern.ReflectionHacks.field_name;
+import static me.meta4245.betterthanmodern.ReflectionHacks.fieldName;
 import static me.meta4245.betterthanmodern.ReflectionHacks.getBlocks;
 
 @Mixin(AxeItem.class)
@@ -29,28 +25,16 @@ public abstract class AxeItemMixin {
             opcode = Opcodes.PUTSTATIC,
             shift = At.Shift.AFTER))
     private static void append(CallbackInfo ci) {
-        List<Class<?>> classes;
-        try {
-            classes = getBlocks()
-                    .stream()
-                    .filter(clazz -> clazz.isAnnotationPresent(Axe.class))
-                    .toList();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        List<Block> blocks = new ArrayList<>(Arrays.asList(axeEffectiveBlocks));
-        for (Class<?> c : classes) {
-            Block block;
-            try {
-                block = (Block) BlockRegistry.class.getDeclaredField(field_name(c)).get(null);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-
-            blocks.add(block);
-        }
-
-        axeEffectiveBlocks = blocks.toArray(new Block[0]);
+        axeEffectiveBlocks = (Block[]) getBlocks()
+                .stream()
+                .filter(clazz -> clazz.isAnnotationPresent(Axe.class))
+                .map(clazz -> {
+                    try {
+                        return (Block) BlockRegistry.class.getDeclaredField(fieldName(clazz)).get(null);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .toArray();
     }
 }

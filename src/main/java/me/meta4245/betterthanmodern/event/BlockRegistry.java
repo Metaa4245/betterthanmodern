@@ -10,9 +10,6 @@ import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.Namespace;
 import net.modificationstation.stationapi.api.util.Null;
 
-import java.lang.reflect.Field;
-import java.util.List;
-
 import static me.meta4245.betterthanmodern.ReflectionHacks.*;
 
 public class BlockRegistry {
@@ -26,7 +23,7 @@ public class BlockRegistry {
     public static Block melon;
 
     private Block block(Class<? extends Block> clazz) {
-        String key = namespace_name(clazz);
+        String key = namespaceName(clazz);
         Block block;
 
         try {
@@ -42,21 +39,24 @@ public class BlockRegistry {
 
     @EventListener
     public void registerBlocks(BlockRegistryEvent event) {
-        List<Field> fields = getFieldsOfType(BlockRegistry.class, Block.class);
-
-        for (Field f : fields) {
+        getFieldsOfType(BlockRegistry.class, Block.class).forEach(f -> {
+            Class<? extends Block> clazz;
             try {
-                Class<? extends Block> clazz = block_class(class_name(f));
-                f.set(null, block(clazz));
-
-                Fuel anno = clazz.getAnnotation(Fuel.class);
-                if (anno != null) {
-                    Block fieldBlock = (Block)f.get(null);
-                    FuelRegistry.addFuelItem(fieldBlock.asItem(), anno.value());
-                }
+                clazz = blockClass(className(f));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        }
+            Block block = block(clazz);
+
+            try {
+                f.set(null, block);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            Fuel anno = clazz.getAnnotation(Fuel.class);
+            if (anno != null) {
+                FuelRegistry.addFuelItem(block.asItem(), anno.value());
+            }
+        });
     }
 }

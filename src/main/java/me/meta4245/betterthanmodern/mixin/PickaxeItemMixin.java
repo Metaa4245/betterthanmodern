@@ -14,9 +14,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-import static me.meta4245.betterthanmodern.ReflectionHacks.field_name;
+import static me.meta4245.betterthanmodern.ReflectionHacks.fieldName;
 import static me.meta4245.betterthanmodern.ReflectionHacks.getBlocks;
 
 @Mixin(PickaxeItem.class)
@@ -30,7 +31,7 @@ public abstract class PickaxeItemMixin {
                     Map.entry(Block.GOLD_BLOCK, 2),
                     Map.entry(Block.GOLD_ORE, 2),
                     Map.entry(Block.REDSTONE_ORE, 2),
-                    Map.entry(Block.LIT_REDSTONE_ORE,2),
+                    Map.entry(Block.LIT_REDSTONE_ORE, 2),
                     Map.entry(Block.IRON_BLOCK, 1),
                     Map.entry(Block.IRON_ORE, 1),
                     Map.entry(Block.LAPIS_BLOCK, 1),
@@ -43,30 +44,19 @@ public abstract class PickaxeItemMixin {
 
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void append(CallbackInfo ci) {
-        List<Class<?>> classes;
-        try {
-            classes = getBlocks()
-                    .stream()
-                    .filter(clazz -> clazz.isAnnotationPresent(Pickaxe.class))
-                    .toList();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        pickaxeEffectiveBlocks = (Block[]) getBlocks().stream()
+                .filter(clazz -> clazz.isAnnotationPresent(Pickaxe.class))
+                .map(clazz -> {
+                    try {
+                        Block x = (Block) BlockRegistry.class.getDeclaredField(fieldName(clazz)).get(null);
+                        tiers.put(x, clazz.getAnnotation(Pickaxe.class).value());
 
-        List<Block> blocks = new ArrayList<>(Arrays.asList(pickaxeEffectiveBlocks));
-        for (Class<?> c : classes) {
-            Block block;
-            try {
-                block = (Block) BlockRegistry.class.getDeclaredField(field_name(c)).get(null);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-
-            blocks.add(block);
-            tiers.put(block, block.getClass().getAnnotation(Pickaxe.class).value());
-        }
-
-        pickaxeEffectiveBlocks = blocks.toArray(new Block[0]);
+                        return x;
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .toArray();
     }
 
     @Inject(method = "isSuitableFor", at = @At("HEAD"), cancellable = true)
@@ -75,8 +65,11 @@ public abstract class PickaxeItemMixin {
 
         Integer tier = tiers.get(block);
         if (tier == null) {
-            cir.setReturnValue(block.material == Material.STONE || block.material == Material.METAL);
-            // IntelliJ don't warn please
+            cir.setReturnValue(
+                    block.material == Material.STONE
+                            || block.material == Material.METAL
+            );
+
             return;
         }
 

@@ -22,7 +22,8 @@ public abstract class FarmlandBlockMixin {
             int y,
             int z,
             Entity entity,
-            @NotNull CallbackInfo ci) {
+            @NotNull CallbackInfo ci
+    ) {
         ci.cancel();
     }
 }

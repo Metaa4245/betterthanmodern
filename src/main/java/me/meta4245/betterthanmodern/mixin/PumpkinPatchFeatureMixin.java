@@ -23,7 +23,9 @@ public class PumpkinPatchFeatureMixin {
             int z,
             CallbackInfoReturnable<Boolean> cir
     ) {
-        Block block = random.nextBoolean() ? BlockRegistry.melon : Block.PUMPKIN;
+        Block block = random.nextBoolean()
+                ? BlockRegistry.melon
+                : Block.PUMPKIN;
 
         for (int i = 0; i < 64; ++i) {
             int randX = x + random.nextInt(8) - random.nextInt(8);
@@ -34,15 +36,25 @@ public class PumpkinPatchFeatureMixin {
             boolean canPlace = block.canPlaceAt(world, randX, randY, randZ);
             int blockId = world.getBlockId(randX, randY - 1, randZ);
 
-            if (isAir && blockId == Block.GRASS_BLOCK.id && canPlace) {
-                world.setBlockWithoutNotifyingNeighbors(
-                        randX,
-                        randY,
-                        randZ,
-                        block.id,
-                        random.nextInt(4)
-                );
+            if (!isAir) {
+                continue;
             }
+
+            if (!canPlace) {
+                continue;
+            }
+
+            if (blockId != Block.GRASS_BLOCK.id) {
+                continue;
+            }
+
+            world.setBlockWithoutNotifyingNeighbors(
+                    randX,
+                    randY,
+                    randZ,
+                    block.id,
+                    random.nextInt(4)
+            );
         }
 
         cir.setReturnValue(true);
