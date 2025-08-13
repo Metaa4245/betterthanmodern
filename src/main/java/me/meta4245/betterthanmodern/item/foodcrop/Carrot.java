@@ -6,11 +6,6 @@ import net.modificationstation.stationapi.api.util.Identifier;
 
 public class Carrot extends TemplateFoodCropItem {
     public Carrot(Identifier identifier) {
-        super(identifier, 2, 64, true);
-    }
-
-    @Override
-    protected int getCropBlockId() {
-        return BlockRegistry.carrots.id;
+        super(identifier, BlockRegistry.carrots.id, 2, 64, true);
     }
 }

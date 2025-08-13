@@ -29,6 +29,7 @@ public abstract class TemplateCropBlock
     @Override
     public void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
+
         builder.add(getAgeProperty());
     }
 
@@ -45,7 +46,7 @@ public abstract class TemplateCropBlock
     // abstract methods or argument to constructor?
     protected abstract Item getSeedItem();
 
-    protected abstract int getSeedCount();
+    protected abstract int getSeedCount(int age);
 
     protected abstract int getProductId();
 
@@ -55,7 +56,7 @@ public abstract class TemplateCropBlock
         return id == Block.FARMLAND.id;
     }
 
-    private float getAvailableMoisture(World world, int x, int y, int z) {
+    protected float getAvailableMoisture(World world, int x, int y, int z) {
         float moisture = 1.0F;
 
         int closeNZ = world.getBlockId(x, y, z - 1);
@@ -180,7 +181,7 @@ public abstract class TemplateCropBlock
             return;
         }
 
-        for (int i = 0; i < getSeedCount(); i++) {
+        for (int i = 0; i < getSeedCount(age); i++) {
             // should this be overridden too?
             if (world.random.nextInt(15) > age) {
                 continue;

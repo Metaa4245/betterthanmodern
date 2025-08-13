@@ -8,4 +8,3 @@ public class ElevenDisc extends TemplateMusicDiscItem {
         super(identifier, "11");
     }
 }
-

@@ -1,0 +1,7 @@
+{
+  "parent": "betterthanmodern:block/stem_fruit",
+  "textures": {
+    "stem": "betterthanmodern:block/melon_stem_disconnected",
+    "upperstem": "betterthanmodern:block/melon_stem_connected"
+  }
+}

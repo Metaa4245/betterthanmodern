@@ -4,20 +4,26 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.modificationstation.stationapi.api.template.item.ItemTemplate;
 import net.modificationstation.stationapi.api.template.item.TemplateStackableFoodItem;
 import net.modificationstation.stationapi.api.util.Identifier;
 
-public abstract class TemplateFoodCropItem extends TemplateStackableFoodItem {
+public abstract class TemplateFoodCropItem
+        extends TemplateStackableFoodItem
+        implements ItemTemplate {
+    private final int cropBlockId;
+
     public TemplateFoodCropItem(
             Identifier identifier,
+            int cropBlockId,
             int healAmount,
             int stackAmount,
             boolean isWolfFood
     ) {
         super(identifier, healAmount, isWolfFood, stackAmount);
-    }
 
-    protected abstract int getCropBlockId();
+        this.cropBlockId = cropBlockId;
+    }
 
     @Override
     // any foodcrop is not meat
@@ -48,7 +54,7 @@ public abstract class TemplateFoodCropItem extends TemplateStackableFoodItem {
             return false;
         }
 
-        world.setBlock(x, y + 1, z, getCropBlockId());
+        world.setBlock(x, y + 1, z, cropBlockId);
         stack.count--;
 
         return true;

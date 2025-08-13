@@ -1,0 +1,6 @@
+{
+  "parent": "betterthanmodern:block/stem_growth_3",
+  "textures": {
+    "stem": "betterthanmodern:block/melon_stem_disconnected"
+  }
+}

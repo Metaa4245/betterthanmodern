@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "betterthanmodern:melon"
+    }
+  ],
+  "result": {
+    "item": "betterthanmodern:melon_seeds",
+    "count": 1
+  }
+}

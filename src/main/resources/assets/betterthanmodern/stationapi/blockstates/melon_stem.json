@@ -1,0 +1,43 @@
+{
+  "variants": {
+    "age=0,facing=up": {
+      "model": "betterthanmodern:block/melon_stem_growth_0"
+    },
+    "age=1,facing=up": {
+      "model": "betterthanmodern:block/melon_stem_growth_1"
+    },
+    "age=2,facing=up": {
+      "model": "betterthanmodern:block/melon_stem_growth_2"
+    },
+    "age=3,facing=up": {
+      "model": "betterthanmodern:block/melon_stem_growth_3"
+    },
+    "age=4,facing=up": {
+      "model": "betterthanmodern:block/melon_stem_growth_4"
+    },
+    "age=5,facing=up": {
+      "model": "betterthanmodern:block/melon_stem_growth_5"
+    },
+    "age=6,facing=up": {
+      "model": "betterthanmodern:block/melon_stem_growth_6"
+    },
+    "age=7,facing=up": {
+      "model": "betterthanmodern:block/melon_stem_growth_7"
+    },
+    "facing=west": {
+      "model": "betterthanmodern:block/melon_stem_fruit"
+    },
+    "facing=north": {
+      "model": "betterthanmodern:block/melon_stem_fruit",
+      "y": 90
+    },
+    "facing=east": {
+      "model": "betterthanmodern:block/melon_stem_fruit",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "betterthanmodern:block/melon_stem_fruit",
+      "y": 270
+    }
+  }
+}

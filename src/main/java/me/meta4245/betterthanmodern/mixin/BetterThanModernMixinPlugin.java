@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Set;
 
 public final class BetterThanModernMixinPlugin implements IMixinConfigPlugin {
-
     @Override
     public boolean shouldApplyMixin(
             String targetClassName,

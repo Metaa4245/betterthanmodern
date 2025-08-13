@@ -7,4 +7,9 @@ public class MelonSlice extends TemplateStackableFoodItem {
     public MelonSlice(Identifier identifier) {
         super(identifier, 2, true, 64);
     }
+
+    @Override
+    public boolean isMeat() {
+        return false;
+    }
 }

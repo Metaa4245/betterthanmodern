@@ -25,6 +25,7 @@ public class BlockRegistry {
     public static Block melon;
     public static Block carrots;
     public static Block potatoes;
+    public static Block melonStem;
 
     private Block block(Class<? extends Block> clazz) {
         String key = namespaceName(clazz);

@@ -2,6 +2,7 @@ package me.meta4245.betterthanmodern.block.crop;
 
 import me.meta4245.betterthanmodern.block.template.TemplateCropBlock;
 import me.meta4245.betterthanmodern.event.ItemRegistry;
+import me.meta4245.betterthanmodern.math.Binomial;
 import net.minecraft.item.Item;
 import net.modificationstation.stationapi.api.state.property.IntProperty;
 import net.modificationstation.stationapi.api.util.Identifier;
@@ -28,7 +29,7 @@ public class Carrots extends TemplateCropBlock {
     }
 
     @Override
-    protected int getSeedCount() {
+    protected int getSeedCount(int age) {
         return 0;
     }
 
@@ -39,6 +40,6 @@ public class Carrots extends TemplateCropBlock {
 
     @Override
     protected int getProductCount(Random random) {
-        return random.nextInt(2, 6);
+        return Binomial.rollRangePercent(2, 3, 57.14286);
     }
 }

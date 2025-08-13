@@ -7,4 +7,9 @@ public class GlisteringMelon extends TemplateStackableFoodItem {
     public GlisteringMelon(Identifier identifier) {
         super(identifier, 15, true, 64);
     }
+
+    @Override
+    public boolean isMeat() {
+        return false;
+    }
 }

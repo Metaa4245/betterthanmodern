@@ -7,5 +7,10 @@ public class GoldenCarrot extends TemplateStackableFoodItem {
     public GoldenCarrot(Identifier identifier) {
         super(identifier, 15, true, 64);
     }
+
+    @Override
+    public boolean isMeat() {
+        return false;
+    }
 }
 

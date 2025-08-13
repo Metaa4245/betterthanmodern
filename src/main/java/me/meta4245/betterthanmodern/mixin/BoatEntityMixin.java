@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BoatEntity.class)
-public class BoatEntityMixin {
+public abstract class BoatEntityMixin {
     @ModifyExpressionValue(
             method = "tick",
             at = @At(
