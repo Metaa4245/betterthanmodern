@@ -10,7 +10,9 @@ import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.Namespace;
 import net.modificationstation.stationapi.api.util.Null;
 
-import static me.meta4245.betterthanmodern.ReflectionHacks.*;
+import java.lang.reflect.Field;
+
+import static me.meta4245.betterthanmodern.reflection.Utilities.*;
 
 public class BlockRegistry {
     @Entrypoint.Namespace
@@ -21,6 +23,8 @@ public class BlockRegistry {
     public static Block redstoneBlock;
     public static Block stoneBricks;
     public static Block melon;
+    public static Block carrots;
+    public static Block potatoes;
 
     private Block block(Class<? extends Block> clazz) {
         String key = namespaceName(clazz);
@@ -39,21 +43,13 @@ public class BlockRegistry {
 
     @EventListener
     public void registerBlocks(BlockRegistryEvent event) {
-        getFieldsOfType(BlockRegistry.class, Block.class).forEach(f -> {
-            Class<? extends Block> clazz;
-            try {
-                clazz = blockClass(className(f));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-            Block block = block(clazz);
+        getBlocks().forEach(b -> {
+            Field f = getField(BlockRegistry.class, fieldName(b));
+            Block block = block(b);
 
-            try {
-                f.set(null, block);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-            Fuel anno = clazz.getAnnotation(Fuel.class);
+            setField(f, block);
+
+            Fuel anno = b.getAnnotation(Fuel.class);
             if (anno != null) {
                 FuelRegistry.addFuelItem(block.asItem(), anno.value());
             }

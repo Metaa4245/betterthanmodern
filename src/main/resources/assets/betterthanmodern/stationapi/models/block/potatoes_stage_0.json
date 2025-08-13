@@ -1,0 +1,6 @@
+{
+  "parent": "betterthanmodern:block/crop",
+  "textures": {
+    "crop": "betterthanmodern:block/potatoes_stage_0"
+  }
+}

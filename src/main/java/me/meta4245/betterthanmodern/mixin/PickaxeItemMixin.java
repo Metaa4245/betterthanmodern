@@ -7,18 +7,17 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.PickaxeItem;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-import static me.meta4245.betterthanmodern.ReflectionHacks.fieldName;
-import static me.meta4245.betterthanmodern.ReflectionHacks.getBlocks;
+import static me.meta4245.betterthanmodern.reflection.Utilities.*;
 
 @Mixin(PickaxeItem.class)
 public abstract class PickaxeItemMixin {
@@ -39,24 +38,16 @@ public abstract class PickaxeItemMixin {
             )
     );
 
-    @Shadow
-    private static Block[] pickaxeEffectiveBlocks;
-
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void append(CallbackInfo ci) {
-        pickaxeEffectiveBlocks = (Block[]) getBlocks().stream()
-                .filter(clazz -> clazz.isAnnotationPresent(Pickaxe.class))
-                .map(clazz -> {
-                    try {
-                        Block x = (Block) BlockRegistry.class.getDeclaredField(fieldName(clazz)).get(null);
-                        tiers.put(x, clazz.getAnnotation(Pickaxe.class).value());
+        getBlocks()
+                .filter(c -> c.isAnnotationPresent(Pickaxe.class))
+                .forEach(c -> {
+                    Field f = getField(BlockRegistry.class, fieldName(c));
+                    Block b = (Block) getFieldValue(f);
 
-                        return x;
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .toArray();
+                    tiers.put(b, c.getAnnotation(Pickaxe.class).value());
+                });
     }
 
     @Inject(method = "isSuitableFor", at = @At("HEAD"), cancellable = true)

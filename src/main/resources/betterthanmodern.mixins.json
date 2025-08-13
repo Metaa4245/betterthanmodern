@@ -10,12 +10,14 @@
     "ChickenEntityMixin",
     "CowEntityMixin",
     "CreeperEntityMixin",
+    "DyeItemMixin",
     "FarmlandBlockMixin",
     "PickaxeItemMixin",
     "PigEntityMixin",
     "PumpkinPatchFeatureMixin",
     "SheepEntityMixin",
     "ShovelItemMixin",
+    "TallPlantBlockMixin",
     "accessor.EntityAccessor",
     "accessor.ToolItemAccessor"
   ]

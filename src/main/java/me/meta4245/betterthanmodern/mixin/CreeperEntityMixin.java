@@ -39,7 +39,7 @@ public abstract class CreeperEntityMixin {
             ),
             cancellable = true
     )
-    private void onKilledBy(Entity par1, @NotNull CallbackInfo ci) {
+    private void onKilledBy(Entity entity, @NotNull CallbackInfo ci) {
         EntityAccessor accessor = (EntityAccessor) this;
         Random random = accessor.getRandom();
 

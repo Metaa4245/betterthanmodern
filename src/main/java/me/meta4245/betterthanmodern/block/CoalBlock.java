@@ -11,6 +11,7 @@ import net.modificationstation.stationapi.api.util.Identifier;
 public class CoalBlock extends TemplateBlock {
     public CoalBlock(Identifier identifier) {
         super(identifier, Material.METAL);
+
         super.setHardness(5);
         super.setResistance(6);
     }

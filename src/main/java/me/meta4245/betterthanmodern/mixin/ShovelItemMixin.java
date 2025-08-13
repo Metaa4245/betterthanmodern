@@ -11,8 +11,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static me.meta4245.betterthanmodern.ReflectionHacks.fieldName;
-import static me.meta4245.betterthanmodern.ReflectionHacks.getBlocks;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+import static me.meta4245.betterthanmodern.reflection.Utilities.*;
 
 @Mixin(ShovelItem.class)
 public abstract class ShovelItemMixin {
@@ -25,16 +28,23 @@ public abstract class ShovelItemMixin {
             opcode = Opcodes.PUTSTATIC,
             shift = At.Shift.AFTER))
     private static void append(CallbackInfo ci) {
-        shovelEffectiveBlocks = (Block[]) getBlocks()
-                .stream()
+        ArrayList<Block> effective = getBlocks()
                 .filter(c -> c.isAnnotationPresent(Shovel.class))
                 .map(c -> {
-                    try {
-                        return (Block) BlockRegistry.class.getDeclaredField(fieldName(c)).get(null);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
+                    Field f = getField(BlockRegistry.class, fieldName(c));
+                    return (Block) getFieldValue(f);
                 })
-                .toArray();
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        effective.add(Block.DIRT);
+        effective.add(Block.SAND);
+        effective.add(Block.SNOW);
+        effective.add(Block.CLAY);
+        effective.add(Block.GRAVEL);
+        effective.add(Block.FARMLAND);
+        effective.add(Block.SNOW_BLOCK);
+        effective.add(Block.GRASS_BLOCK);
+
+        shovelEffectiveBlocks = effective.toArray(new Block[0]);
     }
 }

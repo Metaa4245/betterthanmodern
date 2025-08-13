@@ -1,5 +1,6 @@
 package me.meta4245.betterthanmodern.event;
 
+import me.meta4245.betterthanmodern.block.template.TemplateCropBlock;
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -12,7 +13,9 @@ import paulevs.bhcreative.api.CreativeTab;
 import paulevs.bhcreative.api.SimpleTab;
 import paulevs.bhcreative.registry.TabRegistryEvent;
 
-import static me.meta4245.betterthanmodern.ReflectionHacks.getFieldsOfType;
+import java.lang.reflect.Field;
+
+import static me.meta4245.betterthanmodern.reflection.Utilities.*;
 
 public class CreativeRegistry {
     @Entrypoint.Namespace
@@ -25,19 +28,19 @@ public class CreativeRegistry {
         tab = new SimpleTab(NAMESPACE.id("tab"), new ItemStack(ItemRegistry.melonSlice));
         event.register(tab);
 
-        getFieldsOfType(ItemRegistry.class, Item.class).forEach(f -> {
-            try {
-                tab.addItem(new ItemStack((Item) f.get(null)));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+        getItems().forEach(i -> {
+            Field f = getField(ItemRegistry.class, fieldName(i));
+            tab.addItem(new ItemStack((Item) getFieldValue(f)));
         });
-        getFieldsOfType(BlockRegistry.class, Block.class).forEach(f -> {
-            try {
-                tab.addItem(new ItemStack((Block) f.get(null)));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+        getBlocks().forEach(b -> {
+            Field f = getField(BlockRegistry.class, fieldName(b));
+            Block block = (Block) getFieldValue(f);
+
+            if (block instanceof TemplateCropBlock) {
+                return;
             }
+
+            tab.addItem(new ItemStack(block));
         });
     }
 }

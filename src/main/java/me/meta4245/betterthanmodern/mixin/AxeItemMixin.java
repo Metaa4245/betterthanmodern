@@ -11,8 +11,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static me.meta4245.betterthanmodern.ReflectionHacks.fieldName;
-import static me.meta4245.betterthanmodern.ReflectionHacks.getBlocks;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+import static me.meta4245.betterthanmodern.reflection.Utilities.*;
 
 @Mixin(AxeItem.class)
 public abstract class AxeItemMixin {
@@ -25,16 +28,19 @@ public abstract class AxeItemMixin {
             opcode = Opcodes.PUTSTATIC,
             shift = At.Shift.AFTER))
     private static void append(CallbackInfo ci) {
-        axeEffectiveBlocks = (Block[]) getBlocks()
-                .stream()
-                .filter(clazz -> clazz.isAnnotationPresent(Axe.class))
-                .map(clazz -> {
-                    try {
-                        return (Block) BlockRegistry.class.getDeclaredField(fieldName(clazz)).get(null);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
+        ArrayList<Block> effective = getBlocks()
+                .filter(c -> c.isAnnotationPresent(Axe.class))
+                .map(c -> {
+                    Field f = getField(BlockRegistry.class, fieldName(c));
+                    return (Block) getFieldValue(f);
                 })
-                .toArray();
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        effective.add(Block.LOG);
+        effective.add(Block.CHEST);
+        effective.add(Block.PLANKS);
+        effective.add(Block.BOOKSHELF);
+
+        axeEffectiveBlocks = effective.toArray(new Block[0]);
     }
 }

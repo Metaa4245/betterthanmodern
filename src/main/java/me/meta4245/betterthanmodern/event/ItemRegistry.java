@@ -8,7 +8,9 @@ import net.modificationstation.stationapi.api.util.Identifier;
 import net.modificationstation.stationapi.api.util.Namespace;
 import net.modificationstation.stationapi.api.util.Null;
 
-import static me.meta4245.betterthanmodern.ReflectionHacks.*;
+import java.lang.reflect.Field;
+
+import static me.meta4245.betterthanmodern.reflection.Utilities.*;
 
 public class ItemRegistry {
     @Entrypoint.Namespace
@@ -40,6 +42,8 @@ public class ItemRegistry {
     public static Item rawMutton;
     public static Item rawPorkchop;
     public static Item melonSlice;
+    public static Item potato;
+    public static Item bakedPotato;
 
     private Item item(Class<? extends Item> clazz) {
         String key = namespaceName(clazz);
@@ -58,12 +62,9 @@ public class ItemRegistry {
 
     @EventListener
     public void registerItems(ItemRegistryEvent event) {
-        getFieldsOfType(ItemRegistry.class, Item.class).forEach(f -> {
-            try {
-                f.set(null, item(itemClass(className(f))));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+        getItems().forEach(i -> {
+            Field f = getField(ItemRegistry.class, fieldName(i));
+            setField(f, item(i));
         });
     }
 }
