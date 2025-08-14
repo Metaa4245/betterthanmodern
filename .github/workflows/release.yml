@@ -1,41 +1,36 @@
 name: Release
 
 on:
-  workflow_run:
-    workflows: [ "Build" ]
-    types:
-      - completed
+  push:
+    tags: [ "*" ]
 
 jobs:
   release:
     runs-on: ubuntu-latest
-    if: |
-      github.event.workflow_run.conclusion == 'success' &&
-      contains(join(fromJSON(toJSON(github.event.workflow_run.artifacts.*.name)), ','), 'tag')
     permissions:
       contents: write
 
     steps:
-      - name: Download tag
-        uses: actions/download-artifact@v4
-        with:
-          name: tag
-          path:
+      - uses: actions/checkout@v4
 
-      - name: Get tag
-        id: check_tag
-        run: echo "tag_name=$(cat tag.txt)" >> $GITHUB_OUTPUT
-
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
         with:
-          name: mod
-          path: build/libs
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582
+        with:
+          cache-read-only: ${{ github.ref_type != 'tag' }}
+
+      - name: Build with Gradle Wrapper
+        run: ./gradlew build
 
       - name: Detect version type
         id: version_type
         run: |
-          tag="${{ steps.check_tag.outputs.tag_name }}"
+          tag="${GITHUB_REF#refs/tags/}"
           if [[ "$tag" == *alpha* ]]; then
             echo "type=alpha" >> $GITHUB_OUTPUT
           elif [[ "$tag" == *beta* ]]; then
@@ -53,7 +48,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           github-generate-release-notes: true
 
-          version: ${{ steps.check_tag.outputs.tag_name }}
+          version: ${{ github.ref_name }}
           version-type: ${{ steps.version_type.outputs.type }}
           loaders: fabric, babric
           game-versions: "b1.7.3"
