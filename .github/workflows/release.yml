@@ -27,18 +27,6 @@ jobs:
       - name: Build with Gradle Wrapper
         run: ./gradlew build
 
-      - name: Detect version type
-        id: version_type
-        run: |
-          tag="${GITHUB_REF#refs/tags/}"
-          if [[ "$tag" == *alpha* ]]; then
-            echo "type=alpha" >> $GITHUB_OUTPUT
-          elif [[ "$tag" == *beta* ]]; then
-            echo "type=beta" >> $GITHUB_OUTPUT
-          else
-            echo "type=release" >> $GITHUB_OUTPUT
-          fi
-
       - name: Publish to GitHub + Modrinth
         uses: Kira-NT/mc-publish@v3.3.0
         with:
@@ -46,12 +34,10 @@ jobs:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          github-generate-release-notes: true
+          github-generate-changelog: true
 
-          version: ${{ github.ref_name }}
-          version-type: ${{ steps.version_type.outputs.type }}
+          game-version-filter: betas
           loaders: fabric, babric
-          game-versions: "b1.7.3"
           dependencies: |
             stationapi
             bh-creative(optional)
