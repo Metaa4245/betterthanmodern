@@ -1,0 +1,63 @@
+name: Release
+
+on:
+  workflow_run:
+    workflows: [ "Build" ]
+    types:
+      - completed
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: |
+      github.event.workflow_run.conclusion == 'success' &&
+      contains(join(fromJSON(toJSON(github.event.workflow_run.artifacts.*.name)), ','), 'tag')
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download tag
+        uses: actions/download-artifact@v4
+        with:
+          name: tag
+          path:
+
+      - name: Get tag
+        id: check_tag
+        run: echo "tag_name=$(cat tag.txt)" >> $GITHUB_OUTPUT
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: mod
+          path: build/libs
+
+      - name: Detect version type
+        id: version_type
+        run: |
+          tag="${{ steps.check_tag.outputs.tag_name }}"
+          if [[ "$tag" == *alpha* ]]; then
+            echo "type=alpha" >> $GITHUB_OUTPUT
+          elif [[ "$tag" == *beta* ]]; then
+            echo "type=beta" >> $GITHUB_OUTPUT
+          else
+            echo "type=release" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Publish to GitHub + Modrinth
+        uses: Kira-NT/mc-publish@v3.3.0
+        with:
+          modrinth-id: betterthanmodern
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-generate-release-notes: true
+
+          version: ${{ steps.check_tag.outputs.tag_name }}
+          version-type: ${{ steps.version_type.outputs.type }}
+          loaders: fabric, babric
+          game-versions: "b1.7.3"
+          dependencies: |
+            stationapi
+            bh-creative(optional)
+            beta-1.7.3-music-discs(optional)
