@@ -13,4 +13,3 @@ public class GoldenCarrot extends TemplateStackableFoodItem {
         return false;
     }
 }
-

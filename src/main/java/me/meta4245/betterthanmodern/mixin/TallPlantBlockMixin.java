@@ -5,29 +5,28 @@ import net.minecraft.block.TallPlantBlock;
 import net.minecraft.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Mixin(TallPlantBlock.class)
 public abstract class TallPlantBlockMixin {
-    @Inject(method = "getDroppedItemId", at = @At("HEAD"), cancellable = true)
-    public void getDroppedItemId(
-            int blockMeta,
-            Random random,
-            CallbackInfoReturnable<Integer> cir
-    ) {
+    @Redirect(
+            method = "getDroppedItemId",
+            at = @At(
+                    value = "FIELD",
+                    target = "Lnet/minecraft/item/Item;SEEDS:Lnet/minecraft/item/Item;"
+            )
+    )
+    public Item redirectItem() {
+        ThreadLocalRandom rng = ThreadLocalRandom.current();
+
         final Item[] ids = {
                 ItemRegistry.carrot,
                 ItemRegistry.potato,
                 Item.SEEDS
         };
 
-        int id = random.nextInt(8) == 0
-                ? ids[random.nextInt(ids.length)].id
-                : -1;
-
-        cir.setReturnValue(id);
+        return ids[rng.nextInt(ids.length)];
     }
 }

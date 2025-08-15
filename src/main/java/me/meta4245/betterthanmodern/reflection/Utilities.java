@@ -3,7 +3,9 @@ package me.meta4245.betterthanmodern.reflection;
 import me.meta4245.betterthanmodern.event.BlockRegistry;
 import me.meta4245.betterthanmodern.event.ItemRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
@@ -109,5 +111,16 @@ public abstract class Utilities {
                 throw new RuntimeException(e);
             }
         });
+    }
+
+    public static Entity createEntity(
+            Class<? extends Entity> clazz,
+            World world
+    ) {
+        try {
+            return clazz.getConstructor(World.class).newInstance(world);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

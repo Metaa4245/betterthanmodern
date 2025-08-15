@@ -3,6 +3,7 @@ package me.meta4245.betterthanmodern.block.template;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Box;
@@ -43,14 +44,13 @@ public abstract class TemplateCropBlock
                 .orElse(0);
     }
 
-    // abstract methods or argument to constructor?
     protected abstract Item getSeedItem();
 
     protected abstract int getSeedCount(int age);
 
-    protected abstract int getProductId();
+    protected abstract Item getProduct(int age);
 
-    protected abstract int getProductCount(Random random);
+    protected abstract int getProductCount(int age);
 
     protected boolean canPlantOnTop(int id) {
         return id == Block.FARMLAND.id;
@@ -108,7 +108,7 @@ public abstract class TemplateCropBlock
             return;
         }
 
-        this.dropStacks(world, x, y, z, world.getBlockState(x, y, z), 1.0F);
+        this.dropStacks(world, x, y, z, world.getBlockState(x, y, z));
         world.setBlock(x, y, z, 0);
     }
 
@@ -120,7 +120,6 @@ public abstract class TemplateCropBlock
                 z,
                 state.with(getAgeProperty(), getMaxAge())
         );
-        world.setBlockMeta(x, y, z, getMaxAge());
     }
 
     @Override
@@ -132,6 +131,7 @@ public abstract class TemplateCropBlock
     @Override
     public void neighborUpdate(World world, int x, int y, int z, int id) {
         super.neighborUpdate(world, x, y, z, id);
+
         this.breakIfCannotGrow(world, x, y, z);
     }
 
@@ -158,20 +158,47 @@ public abstract class TemplateCropBlock
         world.setBlockState(x, y, z, state.with(getAgeProperty(), ++age));
     }
 
+    @Override
     public void dropStacks(
             World world,
             int x,
             int y,
             int z,
-            BlockState state,
+            int meta,
             float luck
     ) {
-        int age = state.get(getAgeProperty());
+    }
 
-        super.dropStacks(world, x, y, z, age, luck);
+    @Override
+    public void afterBreak(World world, PlayerEntity player, int x, int y, int z, BlockState state, int meta) {
+        dropStacks(world, x, y, z, state);
 
+        super.afterBreak(world, player, x, y, z, state, meta);
+    }
+
+    public void dropStacks(
+            World world,
+            int x,
+            int y,
+            int z,
+            BlockState state
+    ) {
         if (world.isRemote) {
             return;
+        }
+
+        int age = state.get(getAgeProperty());
+        int productCount = this.getProductCount(age);
+        Item product = this.getProduct(age);
+
+        if (product != null) {
+            this.dropStack(
+                    world,
+                    x,
+                    y,
+                    z,
+                    new ItemStack(product, productCount)
+            );
         }
 
         Item seed = getSeedItem();
@@ -182,11 +209,6 @@ public abstract class TemplateCropBlock
         }
 
         for (int i = 0; i < getSeedCount(age); i++) {
-            // should this be overridden too?
-            if (world.random.nextInt(15) > age) {
-                continue;
-            }
-
             float deltaX = world.random.nextFloat() * 0.85F;
             float deltaY = world.random.nextFloat() * 0.85F;
             float deltaZ = world.random.nextFloat() * 0.85F;
@@ -224,16 +246,5 @@ public abstract class TemplateCropBlock
     @Override
     public boolean isFullCube() {
         return false;
-    }
-
-    @Override
-    // maybe make this call something else to check if we should drop?
-    public int getDroppedItemId(int blockMeta, Random random) {
-        return blockMeta == getMaxAge() ? getProductId() : -1;
-    }
-
-    @Override
-    public int getDroppedItemCount(Random random) {
-        return getProductCount(random);
     }
 }

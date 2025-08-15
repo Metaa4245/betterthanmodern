@@ -7,8 +7,6 @@ import net.minecraft.item.Item;
 import net.modificationstation.stationapi.api.state.property.IntProperty;
 import net.modificationstation.stationapi.api.util.Identifier;
 
-import java.util.Random;
-
 public class Potatoes extends TemplateCropBlock {
     public static final IntProperty AGE = IntProperty.of("age", 0, 7);
 
@@ -34,12 +32,16 @@ public class Potatoes extends TemplateCropBlock {
     }
 
     @Override
-    protected int getProductId() {
-        return ItemRegistry.potato.id;
+    protected Item getProduct(int age) {
+        return ItemRegistry.potato;
     }
 
     @Override
-    protected int getProductCount(Random random) {
+    protected int getProductCount(int age) {
+        if (age != 7) {
+            return 1;
+        }
+
         return Binomial.rollRangePercent(2, 3, 57.14286);
     }
 }

@@ -7,13 +7,19 @@
   "authors": [
     "Meta4245"
   ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/betterthanmodern",
+    "sources": "https://github.com/Metaa4245/betterthanmodern",
+    "issues": "https://github.com/Metaa4245/betterthanmodern/issues"
+  },
   "license": "MIT",
   "icon": "assets/betterthanmodern/icon.png",
   "environment": "*",
   "entrypoints": {
     "stationapi:event_bus": [
       "me.meta4245.betterthanmodern.event.ItemRegistry",
-      "me.meta4245.betterthanmodern.event.BlockRegistry"
+      "me.meta4245.betterthanmodern.event.BlockRegistry",
+      "me.meta4245.betterthanmodern.event.FeatureRegistry"
     ],
     "bhcreative:event_bus": [
       "me.meta4245.betterthanmodern.event.CreativeRegistry"

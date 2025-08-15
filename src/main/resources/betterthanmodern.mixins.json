@@ -5,20 +5,22 @@
   "compatibilityLevel": "JAVA_21",
   "plugin": "me.meta4245.betterthanmodern.mixin.BetterThanModernMixinPlugin",
   "mixins": [
-    "AxeItemMixin",
+    "AnimalEntityMixin",
     "BoatEntityMixin",
     "ChickenEntityMixin",
     "CowEntityMixin",
     "CreeperEntityMixin",
     "DyeItemMixin",
     "FarmlandBlockMixin",
-    "PickaxeItemMixin",
     "PigEntityMixin",
-    "PumpkinPatchFeatureMixin",
+    "PlayerEntityMixin",
+    "RedstoneTorchBlockMixin",
     "SheepEntityMixin",
-    "ShovelItemMixin",
     "TallPlantBlockMixin",
     "accessor.EntityAccessor",
     "accessor.ToolItemAccessor"
+  ],
+  "client": [
+    "LivingEntityRendererMixin"
   ]
 }

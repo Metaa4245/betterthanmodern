@@ -112,16 +112,18 @@ public class MelonStem extends TemplateCropBlock {
 
     @Override
     protected int getSeedCount(int age) {
-        return seedDrops.get(age).roll();
+        Integer roll = seedDrops.get(age).roll();
+
+        return roll == null ? 0 : roll;
     }
 
     @Override
-    protected int getProductId() {
-        return -1;
+    protected Item getProduct(int age) {
+        return null;
     }
 
     @Override
-    protected int getProductCount(Random random) {
+    protected int getProductCount(int age) {
         return 0;
     }
 

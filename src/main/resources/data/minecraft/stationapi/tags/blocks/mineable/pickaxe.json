@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "betterthanmodern:coal_block",
+    "betterthanmodern:redstone_block",
+    "betterthanmodern:smooth_stone",
+    "betterthanmodern:stone_bricks"
+  ]
+}

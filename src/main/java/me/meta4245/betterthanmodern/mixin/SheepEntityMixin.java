@@ -4,15 +4,28 @@ import me.meta4245.betterthanmodern.event.ItemRegistry;
 import me.meta4245.betterthanmodern.mixin.accessor.EntityAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.item.Item;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.List;
 import java.util.Random;
 
 @Mixin(SheepEntity.class)
-public abstract class SheepEntityMixin {
+public abstract class SheepEntityMixin extends AnimalEntityMixin {
+    @Unique
+    private final static List<Item> breedFood = List.of(
+            Item.WHEAT
+    );
+
+    public SheepEntityMixin(World world) {
+        super(world);
+    }
+
     @Inject(
             method = "getDroppedItemId",
             at = @At("HEAD"),
@@ -32,5 +45,10 @@ public abstract class SheepEntityMixin {
 
         // LivingEntity doesn't drop if getDroppedId returns 0
         cir.setReturnValue(0);
+    }
+
+    @Override
+    protected List<Item> getBreedFood() {
+        return breedFood;
     }
 }

@@ -1,6 +1,5 @@
 package me.meta4245.betterthanmodern.block.crop;
 
-import me.meta4245.betterthanmodern.annotation.Axe;
 import me.meta4245.betterthanmodern.event.ItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -11,7 +10,6 @@ import net.modificationstation.stationapi.api.util.Identifier;
 import java.util.List;
 import java.util.Random;
 
-@Axe
 public class Melon extends TemplateBlock {
     private static final List<Integer> suitableBlocks = List.of(
             Block.DIRT.id,

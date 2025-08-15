@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "betterthanmodern:melon"
+      "item": "betterthanmodern:melon_slice"
     }
   ],
   "result": {
