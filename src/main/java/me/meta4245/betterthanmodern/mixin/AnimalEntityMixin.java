@@ -153,18 +153,20 @@ public abstract class AnimalEntityMixin
         int timer = (int) Math.floor(btm$getChildTimer() * 0.75f);
         btm$setChildTimer(timer);
 
-        double bbWidth = this.boundingBox.maxX;
-        double bbHeight = this.boundingBox.maxY;
+        if (this.world.isRemote) {
+            double bbWidth = this.boundingBox.maxX;
+            double bbHeight = this.boundingBox.maxY;
 
-        double x = (this.random.nextFloat() * bbWidth * 2.0F) - bbWidth;
-        double y = (this.random.nextFloat() * bbHeight);
-        double z = (this.random.nextFloat() * bbWidth * 2.0F) - bbWidth;
+            double x = (this.random.nextFloat() * bbWidth * 2.0F) - bbWidth;
+            double y = (this.random.nextFloat() * bbHeight);
+            double z = (this.random.nextFloat() * bbWidth * 2.0F) - bbWidth;
 
-        double vx = this.random.nextGaussian() * 0.02;
-        double vy = this.random.nextGaussian() * 0.02;
-        double vz = this.random.nextGaussian() * 0.02;
+            double vx = this.random.nextGaussian() * 0.02;
+            double vy = this.random.nextGaussian() * 0.02;
+            double vz = this.random.nextGaussian() * 0.02;
 
-        this.world.addParticle("soulflame", x, y, z, vx, vy, vz);
+            this.world.addParticle("soulflame", x, y, z, vx, vy, vz);
+        }
 
         return true;
     }
@@ -298,22 +300,20 @@ public abstract class AnimalEntityMixin
             return;
         }
 
-        if (age % 4 != 0) {
-            return;
+        if (this.world.isRemote && age % 4 == 0) {
+            double bbWidth = this.boundingBox.maxX;
+            double bbHeight = this.boundingBox.maxY;
+
+            double x = (this.random.nextFloat() * bbWidth * 2.0F) - bbWidth;
+            double y = (this.random.nextFloat() * bbHeight);
+            double z = (this.random.nextFloat() * bbWidth * 2.0F) - bbWidth;
+
+            double vx = this.random.nextGaussian() * 0.02;
+            double vy = this.random.nextGaussian() * 0.02;
+            double vz = this.random.nextGaussian() * 0.02;
+
+            this.world.addParticle("heart", x, y, z, vx, vy, vz);
         }
-
-        double bbWidth = this.boundingBox.maxX;
-        double bbHeight = this.boundingBox.maxY;
-
-        double x = (this.random.nextFloat() * bbWidth * 2.0F) - bbWidth;
-        double y = (this.random.nextFloat() * bbHeight);
-        double z = (this.random.nextFloat() * bbWidth * 2.0F) - bbWidth;
-
-        double vx = this.random.nextGaussian() * 0.02;
-        double vy = this.random.nextGaussian() * 0.02;
-        double vz = this.random.nextGaussian() * 0.02;
-
-        this.world.addParticle("heart", x, y, z, vx, vy, vz);
     }
 
     @Override
